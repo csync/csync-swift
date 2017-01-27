@@ -1,0 +1,1215 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CA0727351C554168006CE1C2 /* CSyncSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA07272B1C554168006CE1C2 /* CSyncSDK.framework */; };
+		CA0727421C555016006CE1C2 /* CSyncSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CA26921D1C0538A700C9827D /* CSyncSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA0727431C55501B006CE1C2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692341C053A8600C9827D /* App.swift */; };
+		CA0727441C55501E006CE1C2 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692371C053F1800C9827D /* Key.swift */; };
+		CA0727451C555022006CE1C2 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E4D1C1DEAC0004FDEF7 /* Value.swift */; };
+		CA0727461C555026006CE1C2 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E4F1C284DAC004FDEF7 /* Operation.swift */; };
+		CA0727471C555029006CE1C2 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E541C28B8CC004FDEF7 /* Request.swift */; };
+		CA0727481C55502D006CE1C2 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E5A1C2DD7C3004FDEF7 /* Response.swift */; };
+		CA0727491C555030006CE1C2 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E521C28B6C4004FDEF7 /* Transport.swift */; };
+		CA07274A1C55503B006CE1C2 /* CSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3810101C0BE79F002A2C9E /* CSyncTests.swift */; };
+		CA07274B1C555040006CE1C2 /* KeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692391C0A2C5200C9827D /* KeyTests.swift */; };
+		CA07274C1C555044006CE1C2 /* ListenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B25FB1C317F7E009A626F /* ListenTests.swift */; };
+		CA07274D1C555048006CE1C2 /* WriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B25F91C31744F009A626F /* WriteTests.swift */; };
+		CA07274E1C55504B006CE1C2 /* AdvanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B87171C35A0BC00D58583 /* AdvanceTests.swift */; };
+		CA07274F1C55504E006CE1C2 /* ObjCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2692291C0538A700C9827D /* ObjCTests.m */; };
+		CA0727541C555C68006CE1C2 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0727511C55597F006CE1C2 /* SwiftWebSocket.framework */; };
+		CA0727651C557BAA006CE1C2 /* CSyncSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA07275B1C557BA9006CE1C2 /* CSyncSDK.framework */; };
+		CA0727731C557C13006CE1C2 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0727721C557C13006CE1C2 /* SwiftWebSocket.framework */; };
+		CA0727741C557CBA006CE1C2 /* CSyncSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CA26921D1C0538A700C9827D /* CSyncSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA0727751C557CC6006CE1C2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692341C053A8600C9827D /* App.swift */; };
+		CA0727761C557CC6006CE1C2 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692371C053F1800C9827D /* Key.swift */; };
+		CA0727771C557CC6006CE1C2 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E4D1C1DEAC0004FDEF7 /* Value.swift */; };
+		CA0727781C557CC6006CE1C2 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E4F1C284DAC004FDEF7 /* Operation.swift */; };
+		CA0727791C557CC6006CE1C2 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E541C28B8CC004FDEF7 /* Request.swift */; };
+		CA07277A1C557CC6006CE1C2 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E5A1C2DD7C3004FDEF7 /* Response.swift */; };
+		CA07277B1C557CC6006CE1C2 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E521C28B6C4004FDEF7 /* Transport.swift */; };
+		CA07277C1C557CDC006CE1C2 /* CSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3810101C0BE79F002A2C9E /* CSyncTests.swift */; };
+		CA07277D1C557CDC006CE1C2 /* KeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692391C0A2C5200C9827D /* KeyTests.swift */; };
+		CA07277E1C557CDC006CE1C2 /* ListenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B25FB1C317F7E009A626F /* ListenTests.swift */; };
+		CA07277F1C557CDC006CE1C2 /* WriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B25F91C31744F009A626F /* WriteTests.swift */; };
+		CA0727801C557CDC006CE1C2 /* AdvanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B87171C35A0BC00D58583 /* AdvanceTests.swift */; };
+		CA0727811C557CDC006CE1C2 /* ObjCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2692291C0538A700C9827D /* ObjCTests.m */; };
+		CA223E4E1C1DEAC0004FDEF7 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E4D1C1DEAC0004FDEF7 /* Value.swift */; };
+		CA223E501C284DAC004FDEF7 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E4F1C284DAC004FDEF7 /* Operation.swift */; };
+		CA223E531C28B6C4004FDEF7 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E521C28B6C4004FDEF7 /* Transport.swift */; };
+		CA223E551C28B8CC004FDEF7 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E541C28B8CC004FDEF7 /* Request.swift */; };
+		CA223E5B1C2DD7C3004FDEF7 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA223E5A1C2DD7C3004FDEF7 /* Response.swift */; };
+		CA26921E1C0538A700C9827D /* CSyncSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CA26921D1C0538A700C9827D /* CSyncSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA2692251C0538A700C9827D /* CSyncSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA26921A1C0538A700C9827D /* CSyncSDK.framework */; };
+		CA26922A1C0538A700C9827D /* ObjCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2692291C0538A700C9827D /* ObjCTests.m */; };
+		CA2692351C053A8600C9827D /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692341C053A8600C9827D /* App.swift */; };
+		CA2692381C053F1800C9827D /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692371C053F1800C9827D /* Key.swift */; };
+		CA26923A1C0A2C5200C9827D /* KeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692391C0A2C5200C9827D /* KeyTests.swift */; };
+		CA2B87181C35A0BC00D58583 /* AdvanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B87171C35A0BC00D58583 /* AdvanceTests.swift */; };
+		CA36E65A1CB19F94005690DA /* ACL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9EF6301CA4C63300694F0D /* ACL.swift */; };
+		CA36E65B1CB19F95005690DA /* ACL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9EF6301CA4C63300694F0D /* ACL.swift */; };
+		CA3810111C0BE79F002A2C9E /* CSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3810101C0BE79F002A2C9E /* CSyncTests.swift */; };
+		CA5536561C73BB5900539EDB /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5536551C73BB5900539EDB /* Stats.swift */; };
+		CA5536571C73BB5900539EDB /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5536551C73BB5900539EDB /* Stats.swift */; };
+		CA5536581C73BB5900539EDB /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5536551C73BB5900539EDB /* Stats.swift */; };
+		CA5536591C74B39100539EDB /* DatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF28E041C6D161B009FAE52 /* DatabaseTests.swift */; };
+		CA55365A1C74B39200539EDB /* DatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF28E041C6D161B009FAE52 /* DatabaseTests.swift */; };
+		CA5EAF4B1C72276C006FC14D /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5EAF4A1C72276C006FC14D /* Log.swift */; };
+		CA5EAF4C1C72276C006FC14D /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5EAF4A1C72276C006FC14D /* Log.swift */; };
+		CA5EAF4D1C72276C006FC14D /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5EAF4A1C72276C006FC14D /* Log.swift */; };
+		CA7B25FA1C31744F009A626F /* WriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B25F91C31744F009A626F /* WriteTests.swift */; };
+		CA7B25FC1C317F7E009A626F /* ListenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B25FB1C317F7E009A626F /* ListenTests.swift */; };
+		CA8252BE1C6F6EF700623F0C /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA8252BD1C6F6EF700623F0C /* SQLite.framework */; };
+		CA8252BF1C6F6FD000623F0C /* Latest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEAA0431C67DC570072E995 /* Latest.swift */; };
+		CA9EF6311CA4C63300694F0D /* ACL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9EF6301CA4C63300694F0D /* ACL.swift */; };
+		CA9EF6331CA6DA9700694F0D /* AclTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9EF6321CA6DA9700694F0D /* AclTests.swift */; };
+		CA9EF6341CA6DA9700694F0D /* AclTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9EF6321CA6DA9700694F0D /* AclTests.swift */; };
+		CA9EF6351CA6DA9700694F0D /* AclTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9EF6321CA6DA9700694F0D /* AclTests.swift */; };
+		CAAA52651C9901690044002E /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAAA52641C9901690044002E /* Config.plist */; };
+		CAAA52661C9901690044002E /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAAA52641C9901690044002E /* Config.plist */; };
+		CAAA52671C9901690044002E /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAAA52641C9901690044002E /* Config.plist */; };
+		CAD1AC241C6127B30034BEA4 /* CSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1AC231C6127B30034BEA4 /* CSLogger.swift */; };
+		CAD1AC251C6127B30034BEA4 /* CSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1AC231C6127B30034BEA4 /* CSLogger.swift */; };
+		CAD1AC261C6127B30034BEA4 /* CSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1AC231C6127B30034BEA4 /* CSLogger.swift */; };
+		CAD621801C66B68F00E96A71 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD6217F1C66B68F00E96A71 /* Database.swift */; };
+		CAD621811C66B68F00E96A71 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD6217F1C66B68F00E96A71 /* Database.swift */; };
+		CAD621821C66B68F00E96A71 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD6217F1C66B68F00E96A71 /* Database.swift */; };
+		CADF44C01C159FC7003784CA /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF44BF1C159FC7003784CA /* SwiftWebSocket.framework */; };
+		CAEAA0401C67B0570072E995 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAEAA03F1C67B0570072E995 /* SQLite.framework */; };
+		CAEAA0421C67B0A90072E995 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAEAA0411C67B0A90072E995 /* SQLite.framework */; };
+		CAEAA0441C67DC570072E995 /* Latest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEAA0431C67DC570072E995 /* Latest.swift */; };
+		CAEAA0451C67DC570072E995 /* Latest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEAA0431C67DC570072E995 /* Latest.swift */; };
+		CAF28E051C6D161B009FAE52 /* DatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF28E041C6D161B009FAE52 /* DatabaseTests.swift */; };
+		CAF2937F1C7F99F500B6F9C1 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2937E1C7F99F500B6F9C1 /* AppTests.swift */; };
+		CAF293801C7F99F500B6F9C1 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2937E1C7F99F500B6F9C1 /* AppTests.swift */; };
+		CAF293811C7F99F500B6F9C1 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2937E1C7F99F500B6F9C1 /* AppTests.swift */; };
+		CAF6C53F1CA22F190043168C /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF6C53E1CA22F190043168C /* AuthData.swift */; };
+		CAF6C5401CA230730043168C /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF6C53E1CA22F190043168C /* AuthData.swift */; };
+		CAF6C5411CA230740043168C /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF6C53E1CA22F190043168C /* AuthData.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CA0727361C554168006CE1C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA2692111C0538A700C9827D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA07272A1C554168006CE1C2;
+			remoteInfo = "CSyncSDK-OSX";
+		};
+		CA0727661C557BAA006CE1C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA2692111C0538A700C9827D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA07275A1C557BA9006CE1C2;
+			remoteInfo = "CSyncSDK-tvOS";
+		};
+		CA2692261C0538A700C9827D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA2692111C0538A700C9827D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA2692191C0538A700C9827D;
+			remoteInfo = CSyncSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CA07272B1C554168006CE1C2 /* CSyncSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSyncSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA0727341C554168006CE1C2 /* Tests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA0727511C55597F006CE1C2 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/Mac/SwiftWebSocket.framework; sourceTree = "<group>"; };
+		CA07275B1C557BA9006CE1C2 /* CSyncSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSyncSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA0727641C557BAA006CE1C2 /* Tests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA0727721C557C13006CE1C2 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/tvOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
+		CA223E4D1C1DEAC0004FDEF7 /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		CA223E4F1C284DAC004FDEF7 /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		CA223E521C28B6C4004FDEF7 /* Transport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
+		CA223E541C28B8CC004FDEF7 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		CA223E5A1C2DD7C3004FDEF7 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		CA26921A1C0538A700C9827D /* CSyncSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSyncSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA26921D1C0538A700C9827D /* CSyncSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSyncSDK.h; sourceTree = "<group>"; };
+		CA26921F1C0538A700C9827D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA2692241C0538A700C9827D /* Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA2692291C0538A700C9827D /* ObjCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCTests.m; sourceTree = "<group>"; };
+		CA26922B1C0538A700C9827D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA2692341C053A8600C9827D /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		CA2692371C053F1800C9827D /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		CA2692391C0A2C5200C9827D /* KeyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyTests.swift; sourceTree = "<group>"; };
+		CA2B87171C35A0BC00D58583 /* AdvanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvanceTests.swift; sourceTree = "<group>"; };
+		CA38100A1C0B50B6002A2C9E /* docstyle.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = docstyle.md; sourceTree = "<group>"; };
+		CA38100B1C0B50B6002A2C9E /* makedocs.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = makedocs.sh; sourceTree = "<group>"; };
+		CA38100C1C0B50B6002A2C9E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CA3810101C0BE79F002A2C9E /* CSyncTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSyncTests.swift; sourceTree = "<group>"; };
+		CA5536551C73BB5900539EDB /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		CA5EAF4A1C72276C006FC14D /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		CA7B25F91C31744F009A626F /* WriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteTests.swift; sourceTree = "<group>"; };
+		CA7B25FB1C317F7E009A626F /* ListenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenTests.swift; sourceTree = "<group>"; };
+		CA7B25FD1C3184D9009A626F /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		CA8252BD1C6F6EF700623F0C /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/tvOS/SQLite.framework; sourceTree = "<group>"; };
+		CA9EF6301CA4C63300694F0D /* ACL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACL.swift; sourceTree = "<group>"; };
+		CA9EF6321CA6DA9700694F0D /* AclTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AclTests.swift; sourceTree = "<group>"; };
+		CAAA52641C9901690044002E /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		CAD1AC231C6127B30034BEA4 /* CSLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSLogger.swift; sourceTree = "<group>"; };
+		CAD6217F1C66B68F00E96A71 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		CADF44BF1C159FC7003784CA /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
+		CAEAA03F1C67B0570072E995 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		CAEAA0411C67B0A90072E995 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/Mac/SQLite.framework; sourceTree = "<group>"; };
+		CAEAA0431C67DC570072E995 /* Latest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Latest.swift; sourceTree = "<group>"; };
+		CAF28E041C6D161B009FAE52 /* DatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseTests.swift; sourceTree = "<group>"; };
+		CAF2937E1C7F99F500B6F9C1 /* AppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTests.swift; sourceTree = "<group>"; };
+		CAF6C53E1CA22F190043168C /* AuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CA0727271C554168006CE1C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA0727541C555C68006CE1C2 /* SwiftWebSocket.framework in Frameworks */,
+				CAEAA0421C67B0A90072E995 /* SQLite.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727311C554168006CE1C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA0727351C554168006CE1C2 /* CSyncSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727571C557BA9006CE1C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA0727731C557C13006CE1C2 /* SwiftWebSocket.framework in Frameworks */,
+				CA8252BE1C6F6EF700623F0C /* SQLite.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727611C557BAA006CE1C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA0727651C557BAA006CE1C2 /* CSyncSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA2692161C0538A700C9827D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADF44C01C159FC7003784CA /* SwiftWebSocket.framework in Frameworks */,
+				CAEAA0401C67B0570072E995 /* SQLite.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA2692211C0538A700C9827D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA2692251C0538A700C9827D /* CSyncSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CA2692101C0538A700C9827D = {
+			isa = PBXGroup;
+			children = (
+				CA7B25FD1C3184D9009A626F /* CONTRIBUTING.md */,
+				CA3810091C0B5097002A2C9E /* Documentation */,
+				CA26921C1C0538A700C9827D /* CSyncSDK */,
+				CA2692281C0538A700C9827D /* CSyncSDKTests */,
+				CAEAA03B1C678F650072E995 /* Frameworks */,
+				CA26921B1C0538A700C9827D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CA26921B1C0538A700C9827D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA26921A1C0538A700C9827D /* CSyncSDK.framework */,
+				CA2692241C0538A700C9827D /* Tests-iOS.xctest */,
+				CA07272B1C554168006CE1C2 /* CSyncSDK.framework */,
+				CA0727341C554168006CE1C2 /* Tests-OSX.xctest */,
+				CA07275B1C557BA9006CE1C2 /* CSyncSDK.framework */,
+				CA0727641C557BAA006CE1C2 /* Tests-tvOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CA26921C1C0538A700C9827D /* CSyncSDK */ = {
+			isa = PBXGroup;
+			children = (
+				CAEAA03A1C678F2E0072E995 /* Database */,
+				CA26921D1C0538A700C9827D /* CSyncSDK.h */,
+				CA9EF6301CA4C63300694F0D /* ACL.swift */,
+				CA2692341C053A8600C9827D /* App.swift */,
+				CAF6C53E1CA22F190043168C /* AuthData.swift */,
+				CA2692371C053F1800C9827D /* Key.swift */,
+				CA223E4D1C1DEAC0004FDEF7 /* Value.swift */,
+				CA223E4F1C284DAC004FDEF7 /* Operation.swift */,
+				CA223E541C28B8CC004FDEF7 /* Request.swift */,
+				CA223E5A1C2DD7C3004FDEF7 /* Response.swift */,
+				CA223E521C28B6C4004FDEF7 /* Transport.swift */,
+				CAD1AC231C6127B30034BEA4 /* CSLogger.swift */,
+				CA5536551C73BB5900539EDB /* Stats.swift */,
+				CA2692361C053A9B00C9827D /* Supporting Files */,
+			);
+			path = CSyncSDK;
+			sourceTree = "<group>";
+		};
+		CA2692281C0538A700C9827D /* CSyncSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				CA3810101C0BE79F002A2C9E /* CSyncTests.swift */,
+				CA9EF6321CA6DA9700694F0D /* AclTests.swift */,
+				CAF2937E1C7F99F500B6F9C1 /* AppTests.swift */,
+				CA2692391C0A2C5200C9827D /* KeyTests.swift */,
+				CA7B25FB1C317F7E009A626F /* ListenTests.swift */,
+				CA7B25F91C31744F009A626F /* WriteTests.swift */,
+				CA2B87171C35A0BC00D58583 /* AdvanceTests.swift */,
+				CAF28E041C6D161B009FAE52 /* DatabaseTests.swift */,
+				CA2692291C0538A700C9827D /* ObjCTests.m */,
+				CAAA52641C9901690044002E /* Config.plist */,
+				CA26922B1C0538A700C9827D /* Info.plist */,
+			);
+			path = CSyncSDKTests;
+			sourceTree = "<group>";
+		};
+		CA2692361C053A9B00C9827D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CA26921F1C0538A700C9827D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CA3810091C0B5097002A2C9E /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				CA38100C1C0B50B6002A2C9E /* README.md */,
+				CA38100A1C0B50B6002A2C9E /* docstyle.md */,
+				CA38100B1C0B50B6002A2C9E /* makedocs.sh */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+		CAEAA03A1C678F2E0072E995 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				CAD6217F1C66B68F00E96A71 /* Database.swift */,
+				CAEAA0431C67DC570072E995 /* Latest.swift */,
+				CA5EAF4A1C72276C006FC14D /* Log.swift */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		CAEAA03B1C678F650072E995 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CAEAA03E1C678FF60072E995 /* iOS */,
+				CAEAA03D1C678FD80072E995 /* OS X */,
+				CAEAA03C1C678FA70072E995 /* tvOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CAEAA03C1C678FA70072E995 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				CA0727721C557C13006CE1C2 /* SwiftWebSocket.framework */,
+				CA8252BD1C6F6EF700623F0C /* SQLite.framework */,
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
+		CAEAA03D1C678FD80072E995 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				CA0727511C55597F006CE1C2 /* SwiftWebSocket.framework */,
+				CAEAA0411C67B0A90072E995 /* SQLite.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		CAEAA03E1C678FF60072E995 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CADF44BF1C159FC7003784CA /* SwiftWebSocket.framework */,
+				CAEAA03F1C67B0570072E995 /* SQLite.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CA0727281C554168006CE1C2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA0727421C555016006CE1C2 /* CSyncSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727581C557BA9006CE1C2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA0727741C557CBA006CE1C2 /* CSyncSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA2692171C0538A700C9827D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA26921E1C0538A700C9827D /* CSyncSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		CA07272A1C554168006CE1C2 /* CSyncSDK-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA07273C1C554168006CE1C2 /* Build configuration list for PBXNativeTarget "CSyncSDK-OSX" */;
+			buildPhases = (
+				CA0727531C555BE1006CE1C2 /* Run SwiftLint */,
+				CA0727261C554168006CE1C2 /* Sources */,
+				CA0727271C554168006CE1C2 /* Frameworks */,
+				CA0727281C554168006CE1C2 /* Headers */,
+				CA0727291C554168006CE1C2 /* Resources */,
+				CA0727551C555CA8006CE1C2 /* Copy Carthage Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CSyncSDK-OSX";
+			productName = "CSyncSDK-OSX";
+			productReference = CA07272B1C554168006CE1C2 /* CSyncSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CA0727331C554168006CE1C2 /* Tests-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA07273F1C554168006CE1C2 /* Build configuration list for PBXNativeTarget "Tests-OSX" */;
+			buildPhases = (
+				CA0727301C554168006CE1C2 /* Sources */,
+				CA0727311C554168006CE1C2 /* Frameworks */,
+				CA0727321C554168006CE1C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA0727371C554168006CE1C2 /* PBXTargetDependency */,
+			);
+			name = "Tests-OSX";
+			productName = "CSyncSDK-OSXTests";
+			productReference = CA0727341C554168006CE1C2 /* Tests-OSX.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CA07275A1C557BA9006CE1C2 /* CSyncSDK-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA07276C1C557BAA006CE1C2 /* Build configuration list for PBXNativeTarget "CSyncSDK-tvOS" */;
+			buildPhases = (
+				CA0727821C557D65006CE1C2 /* Run SwiftLint */,
+				CA0727561C557BA9006CE1C2 /* Sources */,
+				CA0727571C557BA9006CE1C2 /* Frameworks */,
+				CA0727581C557BA9006CE1C2 /* Headers */,
+				CA0727591C557BA9006CE1C2 /* Resources */,
+				CA0727831C557D8E006CE1C2 /* Copy Carthage Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CSyncSDK-tvOS";
+			productName = "CSyncSDK-tvOS";
+			productReference = CA07275B1C557BA9006CE1C2 /* CSyncSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CA0727631C557BAA006CE1C2 /* Tests-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA07276F1C557BAA006CE1C2 /* Build configuration list for PBXNativeTarget "Tests-tvOS" */;
+			buildPhases = (
+				CA0727601C557BAA006CE1C2 /* Sources */,
+				CA0727611C557BAA006CE1C2 /* Frameworks */,
+				CA0727621C557BAA006CE1C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA0727671C557BAA006CE1C2 /* PBXTargetDependency */,
+			);
+			name = "Tests-tvOS";
+			productName = "CSync-tvOSTests";
+			productReference = CA0727641C557BAA006CE1C2 /* Tests-tvOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CA2692191C0538A700C9827D /* CSyncSDK-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA26922E1C0538A700C9827D /* Build configuration list for PBXNativeTarget "CSyncSDK-iOS" */;
+			buildPhases = (
+				CA2B87121C329A6200D58583 /* Run SwiftLint */,
+				CA2692151C0538A700C9827D /* Sources */,
+				CA2692161C0538A700C9827D /* Frameworks */,
+				CA2692171C0538A700C9827D /* Headers */,
+				CA2692181C0538A700C9827D /* Resources */,
+				CADF44C11C15A008003784CA /* Copy Carthage Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CSyncSDK-iOS";
+			productName = CSyncSDK;
+			productReference = CA26921A1C0538A700C9827D /* CSyncSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CA2692231C0538A700C9827D /* Tests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA2692311C0538A700C9827D /* Build configuration list for PBXNativeTarget "Tests-iOS" */;
+			buildPhases = (
+				CA2692201C0538A700C9827D /* Sources */,
+				CA2692211C0538A700C9827D /* Frameworks */,
+				CA2692221C0538A700C9827D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA2692271C0538A700C9827D /* PBXTargetDependency */,
+			);
+			name = "Tests-iOS";
+			productName = CSyncSDKTests;
+			productReference = CA2692241C0538A700C9827D /* Tests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CA2692111C0538A700C9827D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Mike Kistler";
+				TargetAttributes = {
+					CA07272A1C554168006CE1C2 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					CA0727331C554168006CE1C2 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					CA07275A1C557BA9006CE1C2 = {
+						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
+					};
+					CA0727631C557BAA006CE1C2 = {
+						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
+					};
+					CA2692191C0538A700C9827D = {
+						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
+					};
+					CA2692231C0538A700C9827D = {
+						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = CA2692141C0538A700C9827D /* Build configuration list for PBXProject "CSyncSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CA2692101C0538A700C9827D;
+			productRefGroup = CA26921B1C0538A700C9827D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CA2692191C0538A700C9827D /* CSyncSDK-iOS */,
+				CA07272A1C554168006CE1C2 /* CSyncSDK-OSX */,
+				CA07275A1C557BA9006CE1C2 /* CSyncSDK-tvOS */,
+				CA2692231C0538A700C9827D /* Tests-iOS */,
+				CA0727331C554168006CE1C2 /* Tests-OSX */,
+				CA0727631C557BAA006CE1C2 /* Tests-tvOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CA0727291C554168006CE1C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727321C554168006CE1C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAAA52661C9901690044002E /* Config.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727591C557BA9006CE1C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727621C557BAA006CE1C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAAA52671C9901690044002E /* Config.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA2692181C0538A700C9827D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA2692221C0538A700C9827D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAAA52651C9901690044002E /* Config.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CA0727531C555BE1006CE1C2 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		CA0727551C555CA8006CE1C2 /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/SwiftWebSocket.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/SQLite.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CA0727821C557D65006CE1C2 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		CA0727831C557D8E006CE1C2 /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/SwiftWebSocket.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/SQLite.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CA2B87121C329A6200D58583 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		CADF44C11C15A008003784CA /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CA0727261C554168006CE1C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA0727431C55501B006CE1C2 /* App.swift in Sources */,
+				CA5536571C73BB5900539EDB /* Stats.swift in Sources */,
+				CA0727471C555029006CE1C2 /* Request.swift in Sources */,
+				CA5EAF4C1C72276C006FC14D /* Log.swift in Sources */,
+				CA0727441C55501E006CE1C2 /* Key.swift in Sources */,
+				CA0727451C555022006CE1C2 /* Value.swift in Sources */,
+				CAD621811C66B68F00E96A71 /* Database.swift in Sources */,
+				CA0727481C55502D006CE1C2 /* Response.swift in Sources */,
+				CA0727461C555026006CE1C2 /* Operation.swift in Sources */,
+				CA0727491C555030006CE1C2 /* Transport.swift in Sources */,
+				CAF6C5401CA230730043168C /* AuthData.swift in Sources */,
+				CAEAA0451C67DC570072E995 /* Latest.swift in Sources */,
+				CA36E65A1CB19F94005690DA /* ACL.swift in Sources */,
+				CAD1AC251C6127B30034BEA4 /* CSLogger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727301C554168006CE1C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA07274A1C55503B006CE1C2 /* CSyncTests.swift in Sources */,
+				CA07274D1C555048006CE1C2 /* WriteTests.swift in Sources */,
+				CA07274C1C555044006CE1C2 /* ListenTests.swift in Sources */,
+				CA07274E1C55504B006CE1C2 /* AdvanceTests.swift in Sources */,
+				CA9EF6341CA6DA9700694F0D /* AclTests.swift in Sources */,
+				CA5536591C74B39100539EDB /* DatabaseTests.swift in Sources */,
+				CAF293801C7F99F500B6F9C1 /* AppTests.swift in Sources */,
+				CA07274B1C555040006CE1C2 /* KeyTests.swift in Sources */,
+				CA07274F1C55504E006CE1C2 /* ObjCTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727561C557BA9006CE1C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA0727751C557CC6006CE1C2 /* App.swift in Sources */,
+				CA5536581C73BB5900539EDB /* Stats.swift in Sources */,
+				CA0727791C557CC6006CE1C2 /* Request.swift in Sources */,
+				CA5EAF4D1C72276C006FC14D /* Log.swift in Sources */,
+				CA0727761C557CC6006CE1C2 /* Key.swift in Sources */,
+				CA0727771C557CC6006CE1C2 /* Value.swift in Sources */,
+				CAD621821C66B68F00E96A71 /* Database.swift in Sources */,
+				CA07277A1C557CC6006CE1C2 /* Response.swift in Sources */,
+				CA0727781C557CC6006CE1C2 /* Operation.swift in Sources */,
+				CA07277B1C557CC6006CE1C2 /* Transport.swift in Sources */,
+				CAF6C5411CA230740043168C /* AuthData.swift in Sources */,
+				CA8252BF1C6F6FD000623F0C /* Latest.swift in Sources */,
+				CA36E65B1CB19F95005690DA /* ACL.swift in Sources */,
+				CAD1AC261C6127B30034BEA4 /* CSLogger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA0727601C557BAA006CE1C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA07277C1C557CDC006CE1C2 /* CSyncTests.swift in Sources */,
+				CA07277F1C557CDC006CE1C2 /* WriteTests.swift in Sources */,
+				CA07277E1C557CDC006CE1C2 /* ListenTests.swift in Sources */,
+				CA0727801C557CDC006CE1C2 /* AdvanceTests.swift in Sources */,
+				CA9EF6351CA6DA9700694F0D /* AclTests.swift in Sources */,
+				CA55365A1C74B39200539EDB /* DatabaseTests.swift in Sources */,
+				CAF293811C7F99F500B6F9C1 /* AppTests.swift in Sources */,
+				CA07277D1C557CDC006CE1C2 /* KeyTests.swift in Sources */,
+				CA0727811C557CDC006CE1C2 /* ObjCTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA2692151C0538A700C9827D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA223E5B1C2DD7C3004FDEF7 /* Response.swift in Sources */,
+				CA5536561C73BB5900539EDB /* Stats.swift in Sources */,
+				CA223E4E1C1DEAC0004FDEF7 /* Value.swift in Sources */,
+				CA5EAF4B1C72276C006FC14D /* Log.swift in Sources */,
+				CA2692381C053F1800C9827D /* Key.swift in Sources */,
+				CA2692351C053A8600C9827D /* App.swift in Sources */,
+				CAD621801C66B68F00E96A71 /* Database.swift in Sources */,
+				CA223E501C284DAC004FDEF7 /* Operation.swift in Sources */,
+				CA223E531C28B6C4004FDEF7 /* Transport.swift in Sources */,
+				CA223E551C28B8CC004FDEF7 /* Request.swift in Sources */,
+				CAF6C53F1CA22F190043168C /* AuthData.swift in Sources */,
+				CAEAA0441C67DC570072E995 /* Latest.swift in Sources */,
+				CA9EF6311CA4C63300694F0D /* ACL.swift in Sources */,
+				CAD1AC241C6127B30034BEA4 /* CSLogger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA2692201C0538A700C9827D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA26922A1C0538A700C9827D /* ObjCTests.m in Sources */,
+				CA7B25FC1C317F7E009A626F /* ListenTests.swift in Sources */,
+				CA2B87181C35A0BC00D58583 /* AdvanceTests.swift in Sources */,
+				CA7B25FA1C31744F009A626F /* WriteTests.swift in Sources */,
+				CA9EF6331CA6DA9700694F0D /* AclTests.swift in Sources */,
+				CAF28E051C6D161B009FAE52 /* DatabaseTests.swift in Sources */,
+				CAF2937F1C7F99F500B6F9C1 /* AppTests.swift in Sources */,
+				CA3810111C0BE79F002A2C9E /* CSyncTests.swift in Sources */,
+				CA26923A1C0A2C5200C9827D /* KeyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CA0727371C554168006CE1C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA07272A1C554168006CE1C2 /* CSyncSDK-OSX */;
+			targetProxy = CA0727361C554168006CE1C2 /* PBXContainerItemProxy */;
+		};
+		CA0727671C557BAA006CE1C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA07275A1C557BA9006CE1C2 /* CSyncSDK-tvOS */;
+			targetProxy = CA0727661C557BAA006CE1C2 /* PBXContainerItemProxy */;
+		};
+		CA2692271C0538A700C9827D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA2692191C0538A700C9827D /* CSyncSDK-iOS */;
+			targetProxy = CA2692261C0538A700C9827D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CA07273D1C554168006CE1C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = CSyncSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDK;
+				PRODUCT_NAME = CSyncSDK;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CA07273E1C554168006CE1C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = CSyncSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDK;
+				PRODUCT_NAME = CSyncSDK;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CA0727401C554168006CE1C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CSyncSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CA0727411C554168006CE1C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CSyncSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CA07276D1C557BAA006CE1C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = CSyncSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDK;
+				PRODUCT_NAME = CSyncSDK;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		CA07276E1C557BAA006CE1C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = CSyncSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDK;
+				PRODUCT_NAME = CSyncSDK;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		CA0727701C557BAA006CE1C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CSyncSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		CA0727711C557BAA006CE1C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CSyncSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		CA26922C1C0538A700C9827D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CA26922D1C0538A700C9827D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CA26922F1C0538A700C9827D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = CSyncSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDK;
+				PRODUCT_NAME = CSyncSDK;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CA2692301C0538A700C9827D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = CSyncSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDK;
+				PRODUCT_NAME = CSyncSDK;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CA2692321C0538A700C9827D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = CSyncSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CA2692331C0538A700C9827D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = CSyncSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.CSyncSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CA07273C1C554168006CE1C2 /* Build configuration list for PBXNativeTarget "CSyncSDK-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA07273D1C554168006CE1C2 /* Debug */,
+				CA07273E1C554168006CE1C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA07273F1C554168006CE1C2 /* Build configuration list for PBXNativeTarget "Tests-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA0727401C554168006CE1C2 /* Debug */,
+				CA0727411C554168006CE1C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA07276C1C557BAA006CE1C2 /* Build configuration list for PBXNativeTarget "CSyncSDK-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA07276D1C557BAA006CE1C2 /* Debug */,
+				CA07276E1C557BAA006CE1C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA07276F1C557BAA006CE1C2 /* Build configuration list for PBXNativeTarget "Tests-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA0727701C557BAA006CE1C2 /* Debug */,
+				CA0727711C557BAA006CE1C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA2692141C0538A700C9827D /* Build configuration list for PBXProject "CSyncSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA26922C1C0538A700C9827D /* Debug */,
+				CA26922D1C0538A700C9827D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA26922E1C0538A700C9827D /* Build configuration list for PBXNativeTarget "CSyncSDK-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA26922F1C0538A700C9827D /* Debug */,
+				CA2692301C0538A700C9827D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA2692311C0538A700C9827D /* Build configuration list for PBXNativeTarget "Tests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA2692321C0538A700C9827D /* Debug */,
+				CA2692331C0538A700C9827D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CA2692111C0538A700C9827D /* Project object */;
+}

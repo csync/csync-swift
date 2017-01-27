@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CSYNC_HOST</key>
+	<string>localhost</string>
+	<key>CSYNC_PORT</key>
+	<real>6005</real>
+	<key>CSYNC_SLL</key>
+	<false/>
+	<key>CSYNC_DEMO_PROVIDER</key>
+	<string>demo</string>
+	<key>CSYNC_DEMO_TOKEN</key>
+	<string>demoToken</string>
+</dict>
+</plist>

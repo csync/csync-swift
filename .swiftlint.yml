@@ -1,0 +1,34 @@
+disabled_rules: # rule identifiers to exclude from running
+  - colon
+  - opening_brace
+  - todo
+  - function_body_length
+  - valid_docs
+excluded: # paths to ignore during linting.
+  - Carthage
+
+# parameterized rules are first parameterized as a warning level, then error level.
+line_length:
+  - 180 # warning
+  - 240 # error
+
+type_body_length:
+  - 400
+  - 800
+
+function_body_length:
+  - 200
+  - 400
+
+file_length:
+  - 600
+  - 999
+
+# naming rules can set warnings/errors for min_length and max_length
+# additionally they can set excluded names
+variable_name:
+  excluded: # excluded via string array
+    - db
+    - id
+    - op
+    - ws
