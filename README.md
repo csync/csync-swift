@@ -6,7 +6,7 @@
 [carthage-link]: https://github.com/carthage/carthage
 
 [license-svg]: https://img.shields.io/hexpm/l/plug.svg
-[license-link]: https://github.ibm.com/pickles/CSyncSDK-iOS/blob/master/LICENSE
+[license-link]: https://github.com/csync/csync-server/blob/master/LICENSE
 
 Contextual Sync (CSync) is an open source, real-time, continuous data synchronization service for building modern applications. The CSync data store is organized with key/values where keys have a hierarchical structure. Clients can obtain the current value for a key and any subsequent updates by listening on the key. Updates are delivered to all online clients in near-real time. Clients can also listen on a key pattern where some components contain wildcards. 
 
@@ -91,7 +91,7 @@ for up to date installation instructions.
 Add the following to your Cartfile:
 
 ```
-git "git@github.ibm.com:csync/csync-swift.git" "master"
+git "git@github.com:csync/csync-swift.git" "master"
 ```
 
 Then run `carthage update`.
@@ -103,7 +103,7 @@ The `import CSyncSDK` directive is required in order to access CSync APIs.
 ## Connecting to a CSync store
 Applications use the CSync class to create a connection to a specific CSync service.
 
-    let app = App(host: "csync-ga6z7rK.mybluemix.net", port: 667)
+    let app = App(host: "localhost", port: 6005)
 
 ## Listening to values on a key
 
