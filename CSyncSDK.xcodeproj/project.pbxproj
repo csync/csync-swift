@@ -386,7 +386,6 @@
 				CA0727271C554168006CE1C2 /* Frameworks */,
 				CA0727281C554168006CE1C2 /* Headers */,
 				CA0727291C554168006CE1C2 /* Resources */,
-				CA0727551C555CA8006CE1C2 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -424,7 +423,6 @@
 				CA0727571C557BA9006CE1C2 /* Frameworks */,
 				CA0727581C557BA9006CE1C2 /* Headers */,
 				CA0727591C557BA9006CE1C2 /* Resources */,
-				CA0727831C557D8E006CE1C2 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -462,7 +460,6 @@
 				CA2692161C0538A700C9827D /* Frameworks */,
 				CA2692171C0538A700C9827D /* Headers */,
 				CA2692181C0538A700C9827D /* Resources */,
-				CADF44C11C15A008003784CA /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -610,22 +607,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		CA0727551C555CA8006CE1C2 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/SwiftWebSocket.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/SQLite.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		CA0727821C557D65006CE1C2 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -640,22 +621,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		CA0727831C557D8E006CE1C2 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/SwiftWebSocket.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/SQLite.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		CA2B87121C329A6200D58583 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -669,22 +634,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		CADF44C11C15A008003784CA /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
