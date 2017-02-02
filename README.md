@@ -157,3 +157,6 @@ Running the command `carthage update --configuration Debug` will build the SDK i
 # License
 This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](LICENSE).
+
+# Contribution Guide
+Want to contribute? Take a look at our [CONTRIBUTING.md](https://github.com/csync/csync-swift/blob/master/.github/CONTRIBUTING.md)
