@@ -6,3 +6,9 @@ before_script:
   - brew update
   - brew install carthage
   - carthage update
+  - /usr/libexec/PlistBuddy -c "Set CSYNC_HOST $CSYNC_HOST" CSyncSDKTests/Config.plist
+  - /usr/libexec/PlistBuddy -c "Set CSYNC_PORT $CSYNC_PORT" CSyncSDKTests/Config.plist
+  - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_PROVIDER $CSYNC_DEMO_PROVIDER" CSyncSDKTests/Config.plist
+  - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_TOKEN $CSYNC_DEMO_TOKEN" CSyncSDKTests/Config.plist
+script: 
+  - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS=latest clean test
