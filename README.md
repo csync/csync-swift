@@ -6,7 +6,7 @@
 [carthage-link]: https://github.com/carthage/carthage
 
 [license-svg]: https://img.shields.io/hexpm/l/plug.svg
-[license-link]: https://github.ibm.com/pickles/CSyncSDK-iOS/blob/master/LICENSE
+[license-link]: https://github.com/csync/csync-server/blob/master/LICENSE
 
 Contextual Sync (CSync) is an open source, real-time, continuous data synchronization service for building modern applications. The CSync data store is organized with key/values where keys have a hierarchical structure. Clients can obtain the current value for a key and any subsequent updates by listening on the key. Updates are delivered to all online clients in near-real time. Clients can also listen on a key pattern where some components contain wildcards. 
 
@@ -35,8 +35,8 @@ Invalid key: `this is an.invalidkey.🍕.4.5.6.7.8.9.10.11.12.13.14.15.16.17.18`
 ### Wildcards in Keys
 Suppose a developer wishes to listen to a subset of the tree containing multiple nodes, CSync provides this ability through wildcards. Currently CSync supports `*` and `#` as wildcards. 
 
-#### Astrix Wildcard
-An astrix (`*`) wildcard will match any value in the part of the key where the wildcard is. As an example, if a developer listens to `companies.*.stock` in the above tree, the client will sync with all stock nodes for all companies.
+#### Asterisk Wildcard
+An Asterisk (`*`) wildcard will match any value in the part of the key where the wildcard is. As an example, if a developer listens to `companies.*.stock` in the above tree, the client will sync with all stock nodes for all companies.
 
 #### Hash Wildcard
 If a developer wishes to listen to all child nodes in a subset of the tree, the `#` can appended to the end of a key and the client will sync with all child nodes of the specified key. For instance in the above tree if a user listens to `companies.ibm.#`, then the client will sync with all child nodes of `companies.ibm` which include `companies.ibm.stock` and `companies.ibm.offices`. 
@@ -48,6 +48,15 @@ Only the latest, most recent, values sync, so you’re never left with old data.
 
 ## Local Storage
 Work offline, read and write, and have data automatically sync the next time you’re connected. CSync maintains a local cache of data that is available to the client even when the client is offline or otherwise not connected to the CSync service. The client may perform listens, writes, and deletes on the local store while offline. When the client reestablishes connectivity to the CSync service, the local cache is efficiently synchronized with the latest data from the CSync store. The local cache is persistent across application restarts and device reboots.
+
+## Authentication
+Authenticate in an ever-growing number of ways from the provider of your choice. Currently the following methods are supported:
+- [Google OAuth](https://developers.google.com/identity/protocols/OAuth2) `google`
+- [Github Auth](https://developer.github.com/v3/oauth/) `github`
+- Demo Login `demo`
+
+### Demo Login
+The Demo Login is an easy way of getting started with CSync. Just provide the `demo` authentication provider and the `demoToken` to authenticate as a demo user. This token allows for multiple user accounts as long as it is in the form `demoToken({someString})`. For example: `demoToken(abc)`, `demoToken` and `demoToken(123)` would all be treated as different user accounts.
 
 ## Access Control
 Use simple access controls to clearly state who can read and write, keeping your data safe. Each key in the CSync store has an associated access control list (ACL) that specifies which users can access the key. 
@@ -82,7 +91,7 @@ for up to date installation instructions.
 Add the following to your Cartfile:
 
 ```
-git "git@github.ibm.com:csync/csync-swift.git" "master"
+git "git@github.com:csync/csync-swift.git" "master"
 ```
 
 Then run `carthage update`.
@@ -94,7 +103,7 @@ The `import CSyncSDK` directive is required in order to access CSync APIs.
 ## Connecting to a CSync store
 Applications use the CSync class to create a connection to a specific CSync service.
 
-    let app = App(host: "csync-ga6z7rK.mybluemix.net", port: 667)
+    let app = App(host: "localhost", port: 6005)
 
 ## Listening to values on a key
 
@@ -148,3 +157,6 @@ Running the command `carthage update --configuration Debug` will build the SDK i
 # License
 This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](LICENSE).
+
+# Contribution Guide
+Want to contribute? Take a look at our [CONTRIBUTING.md](https://github.com/csync/csync-swift/blob/master/.github/CONTRIBUTING.md)

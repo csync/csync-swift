@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3675A2941E43D59E001CD45D /* SwiftWebSocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CADF44BF1C159FC7003784CA /* SwiftWebSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3675A2951E43D5A0001CD45D /* SQLite.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAEAA03F1C67B0570072E995 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3675A2971E43D5AE001CD45D /* SwiftWebSocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA0727511C55597F006CE1C2 /* SwiftWebSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3675A2981E43D5B6001CD45D /* SQLite.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAEAA0411C67B0A90072E995 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3675A29A1E43D5CC001CD45D /* SwiftWebSocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA0727721C557C13006CE1C2 /* SwiftWebSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3675A29B1E43D5CE001CD45D /* SQLite.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA8252BD1C6F6EF700623F0C /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CA0727351C554168006CE1C2 /* CSyncSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA07272B1C554168006CE1C2 /* CSyncSDK.framework */; };
 		CA0727421C555016006CE1C2 /* CSyncSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CA26921D1C0538A700C9827D /* CSyncSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CA0727431C55501B006CE1C2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2692341C053A8600C9827D /* App.swift */; };
@@ -116,6 +122,42 @@
 			remoteInfo = CSyncSDK;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3675A2931E43D594001CD45D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3675A2941E43D59E001CD45D /* SwiftWebSocket.framework in CopyFiles */,
+				3675A2951E43D5A0001CD45D /* SQLite.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3675A2961E43D5A5001CD45D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3675A2971E43D5AE001CD45D /* SwiftWebSocket.framework in CopyFiles */,
+				3675A2981E43D5B6001CD45D /* SQLite.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3675A2991E43D5C2001CD45D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3675A29A1E43D5CC001CD45D /* SwiftWebSocket.framework in CopyFiles */,
+				3675A29B1E43D5CE001CD45D /* SQLite.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CA07272B1C554168006CE1C2 /* CSyncSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSyncSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -386,7 +428,6 @@
 				CA0727271C554168006CE1C2 /* Frameworks */,
 				CA0727281C554168006CE1C2 /* Headers */,
 				CA0727291C554168006CE1C2 /* Resources */,
-				CA0727551C555CA8006CE1C2 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -404,6 +445,7 @@
 				CA0727301C554168006CE1C2 /* Sources */,
 				CA0727311C554168006CE1C2 /* Frameworks */,
 				CA0727321C554168006CE1C2 /* Resources */,
+				3675A2961E43D5A5001CD45D /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -424,7 +466,6 @@
 				CA0727571C557BA9006CE1C2 /* Frameworks */,
 				CA0727581C557BA9006CE1C2 /* Headers */,
 				CA0727591C557BA9006CE1C2 /* Resources */,
-				CA0727831C557D8E006CE1C2 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -442,6 +483,7 @@
 				CA0727601C557BAA006CE1C2 /* Sources */,
 				CA0727611C557BAA006CE1C2 /* Frameworks */,
 				CA0727621C557BAA006CE1C2 /* Resources */,
+				3675A2991E43D5C2001CD45D /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -462,7 +504,6 @@
 				CA2692161C0538A700C9827D /* Frameworks */,
 				CA2692171C0538A700C9827D /* Headers */,
 				CA2692181C0538A700C9827D /* Resources */,
-				CADF44C11C15A008003784CA /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -480,6 +521,7 @@
 				CA2692201C0538A700C9827D /* Sources */,
 				CA2692211C0538A700C9827D /* Frameworks */,
 				CA2692221C0538A700C9827D /* Resources */,
+				3675A2931E43D594001CD45D /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -610,22 +652,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		CA0727551C555CA8006CE1C2 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/SwiftWebSocket.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/SQLite.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		CA0727821C557D65006CE1C2 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -640,22 +666,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		CA0727831C557D8E006CE1C2 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/SwiftWebSocket.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/SQLite.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		CA2B87121C329A6200D58583 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -669,22 +679,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n        swiftlint\n    else\n        echo \"Skipping Swift Lint for Release Build\"\n    fi\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		CADF44C11C15A008003784CA /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
