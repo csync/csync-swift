@@ -1,4 +1,6 @@
 # Contextual Sync
+
+[![Build Status - Master](https://travis-ci.org/csync/csync-swift.svg?branch=master)](https://travis-ci.org/csync/csync-swift)
 [![Carthage compatible][carthage-svg]][carthage-link]
 [![License][license-svg]][license-link]
 
@@ -6,7 +8,7 @@
 [carthage-link]: https://github.com/carthage/carthage
 
 [license-svg]: https://img.shields.io/hexpm/l/plug.svg
-[license-link]: https://github.com/csync/csync-server/blob/master/LICENSE
+[license-link]: https://github.com/csync/csync-swift/blob/master/LICENSE
 
 Contextual Sync (CSync) is an open source, real-time, continuous data synchronization service for building modern applications. The CSync data store is organized with key/values where keys have a hierarchical structure. Clients can obtain the current value for a key and any subsequent updates by listening on the key. Updates are delivered to all online clients in near-real time. Clients can also listen on a key pattern where some components contain wildcards. 
 
