@@ -12,3 +12,6 @@ before_script:
   - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_TOKEN $CSYNC_DEMO_TOKEN" CSyncSDKTests/Config.plist
 script: 
   - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='10.1' clean test
+branches:
+  only:
+  - master
