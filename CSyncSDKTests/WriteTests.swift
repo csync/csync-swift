@@ -215,4 +215,40 @@ class WriteTests: XCTestCase {
 		waitForExpectations(timeout: 10.0, handler:nil)
 	}
 
+	func testDeleteWildcardThatDoesNotExist() {
+		let expectation = self.expectation(description: "\(#function)")
+
+		// Connect to the CSync store
+		let config = getConfig()
+		let app = App(host: config.host, port: config.port, options: config.options)
+		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		}
+
+		let testKey = app.key(testKeyString("\(#function)")+".*")
+		testKey.delete() {key, error in
+			// Wildcard deletes should always return success, even if nothing was deleted
+			assert(error == nil)
+			expectation.fulfill()
+		}
+		waitForExpectations(timeout: 10.0, handler:nil)
+	}
+
+	func testDeleteThatDoesNotExist() {
+		let expectation = self.expectation(description: "\(#function)")
+
+		// Connect to the CSync store
+		let config = getConfig()
+		let app = App(host: config.host, port: config.port, options: config.options)
+		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		}
+
+		let testKey = app.key(testKeyString("\(#function)"))
+		testKey.delete() {key, error in
+			// Single Key deletes will return an error if you delete something that doesn't exist.
+			assert(error?.code == CSError.requestError.rawValue)
+			expectation.fulfill()
+		}
+		waitForExpectations(timeout: 10.0, handler:nil)
+	}
+
 }
