@@ -299,4 +299,70 @@ class WriteTests: XCTestCase {
 		waitForExpectations(timeout: 20.0, handler:nil)
 	}
 
+	func testDeleteWildcardInMiddle(){
+		let expectation = self.expectation(description: "\(#function)")
+		let config = getConfig()
+		let uuid = UUID().uuidString
+		let app = App(host: config.host, port: config.port, options: config.options)
+		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+			//Check to be sure the right 3 keys are deleted
+			var keyOne = false, keyTwo = false, keyThree = false
+			let listenKey = app.key("tests.DeleteWildcardInMiddle." + uuid + "a.*.e")
+			let writeKey = app.key("tests.DeleteWildcardInMiddle." + uuid + "a.b.e")
+			writeKey.write("b")
+			let writeKey2 = app.key("tests.DeleteWildcardInMiddle." + uuid + "a.c.e")
+			writeKey2.write("c")
+			let writeKey3 = app.key("tests.DeleteWildcardInMiddle." + uuid + "a.d.e")
+			writeKey3.write("d")
+			let writeKey4 = app.key("tests.DeleteWildcardInMiddle." + uuid + "b.e.e")
+			writeKey4.write("be")
+			let writeKey5 = app.key("tests.DeleteWildcardInMiddle." + uuid + "a.e.e.f")
+			writeKey5.write("aef")
+			let writeKey6 = app.key("tests.DeleteWildcardInMiddle." + uuid + "b.a.e.g")
+			writeKey6.write("bag")
+			listenKey.listen { (value, error) -> () in
+				if let key = value?.key {
+					if key == "tests.DeleteWildcardInMiddle." + uuid + "a.b.e" && (value?.exists)! == false {
+						keyOne = true
+					} else if key == "tests.DeleteWildcardInMiddle." + uuid + "a.c.e" && value?.exists == false {
+						keyTwo = true
+					} else if key == "tests.DeleteWildcardInMiddle." + uuid + "a.d.e" && value?.exists == false {
+						keyThree = true
+					} else if key == "tests.DeleteWildcardInMiddle." + uuid + "b.e.e" && value?.exists == false {
+						XCTFail("a.* delete should not delete b.e")
+					} else if key == "tests.DeleteWildcardInMiddle." + uuid + "a.e.e.f" && value?.exists == false {
+						XCTFail("a.* delete should not delete a.e.f")
+					} else if key == "tests.DeleteWildcardInMiddle." + uuid + "b.a.e.g" && value?.exists == false {
+						XCTFail("a.* delete should not delete b.a.g")
+					}
+					//If all three keys that we expected to get deleted were deleted, pass
+					if keyOne && keyTwo && keyThree {
+						expectation.fulfill()
+					}
+				}
+			}
+			let writeKey7 = app.key("tests.DeleteWildcardInMiddle." + uuid + "a.*.e")
+			writeKey7.delete()
+		}
+		waitForExpectations(timeout: 20.0, handler:nil)
+	}
+
+	func testDeleteNonexistantWildcard(){
+		//Deleting something that does not exist should return a success
+		let expectation = self.expectation(description: "\(#function)")
+		let config = getConfig()
+		let uuid = UUID().uuidString
+		let app = App(host: config.host, port: config.port, options: config.options)
+		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+			let writeKey7 = app.key("tests.DeleteNonexistantWildcard.*")
+			writeKey7.delete(){ key, error in
+				assert(error == nil)
+				assert(key.key == "tests.DeleteNonexistantWildcard.*")
+				expectation.fulfill()
+			}
+
+		}
+		waitForExpectations(timeout: 10.0, handler:nil)
+	}
+
 }
