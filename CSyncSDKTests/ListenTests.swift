@@ -156,7 +156,6 @@ class ListenTests: XCTestCase {
 
 		waitForExpectations(timeout: 10.0, handler:nil)
 	}
-
 /*
 	func testListenNullData() {
 		let expectation = expectationWithDescription("\(#function)")
