@@ -351,7 +351,6 @@ class WriteTests: XCTestCase {
 		//Deleting something that does not exist should return a success
 		let expectation = self.expectation(description: "\(#function)")
 		let config = getConfig()
-		let uuid = UUID().uuidString
 		let app = App(host: config.host, port: config.port, options: config.options)
 		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
 			let writeKey7 = app.key("tests.DeleteNonexistantWildcard.*")
