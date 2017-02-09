@@ -197,7 +197,7 @@ class PubOperation : Operation
 		}
 
 		guard !key.isKeyPattern || delete == true else {
-			error = err(CSError.invalidKey, msg:"Only delete pubs may contain a wildcard")
+			error = err(CSError.invalidKey, msg:"Key for write may not contain wildcard characters")
 			return nil
 		}
 
