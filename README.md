@@ -153,6 +153,8 @@ Note: The ACL is inherited from its closest existing ancestor, up to the root ke
         }
     }
     testKey.delete() //Deletes the key
+    
+Note: A delete key can contain any number of wildcards as well. For example, the key a.b would be deleted by `a.*`, but the key `a.b.c` would not because the wildcard only covers the second part of the key. The key `a.b.c` could be deleted by `a.*.*`, `a.b.*`, `a.*.c`, `*.*.c` or `*.*.*`. The key `*.*.*` would delete all keys of length 3. Wildcard deletes make a best effort to delete everything you have access to. If you do not delete anything, you will still get a successful return because the server succesfully deleted all nodes you had access to, even if none existed.
 
 # Troubleshooting
 Running the command `carthage update --configuration Debug` will build the SDK in the Debug configuration rather then the default Release configuration. The Debug configuration logs more messages to assist with troubleshooting.
