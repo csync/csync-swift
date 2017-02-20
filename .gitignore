@@ -10,3 +10,7 @@ Carthage/
 ## jazzy
 build
 docs
+
+## SwiftPackageManager
+Packages
+.build
