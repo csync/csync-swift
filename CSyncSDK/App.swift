@@ -174,7 +174,9 @@ public class App : NSObject
 			for pendingOp in operationQueue.operations {
 				pendingOp.cancel()
 			}
-		} 
+		} else {
+			completionHandler?(nil)		
+		}
 	}
 
 	// MARK: Creating references to entries in the CSync service
