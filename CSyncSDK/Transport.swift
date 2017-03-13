@@ -113,14 +113,22 @@ class Transport
 	Ends a session with the server.
 	*/
 	func endSession() -> () {
+
+		clearSessionInfo()
+		// Close the connection to the server
+		wsState = .closing
+		ws.close()
+	}
+
+	/**
+	Clear Session information.
+	*/
+	func clearSessionInfo() -> () {
 		// Clear session info
 		authProvider = nil
 		token = nil
 		sessionId = nil
 
-		// Close the connection to the server
-		wsState = .closing
-		ws.close()
 	}
 
 	var permanentError : NSError? = nil

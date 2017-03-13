@@ -162,6 +162,7 @@ public class App : NSObject
 		// Clear credentials and acls
 		authData = nil
 		acls = nil
+		transport.clearSessionInfo()
 
 		if transport.canDisconnect {
 			//Store callback to call it when the socket has closed
