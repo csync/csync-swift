@@ -159,6 +159,10 @@ public class App : NSObject
 	*/
 	public func unauth(_ completionHandler: ((_ error: NSError?) -> ())? = nil ) ->()
 	{
+		// Clear credentials and acls
+		authData = nil
+		acls = nil
+
 		if transport.canDisconnect {
 			//Store callback to call it when the socket has closed
 			unauthCallback = completionHandler
@@ -166,18 +170,11 @@ public class App : NSObject
 			// Close session with the server
 			transport.endSession()
 
-			// Clear credentials and acls
-			authData = nil
-			acls = nil
-
 			// Cancel any outstanding operations
 			for pendingOp in operationQueue.operations {
 				pendingOp.cancel()
 			}
-		} else {
-			completionHandler?(err(CSError.authenticationError,
-			                       msg:"Unable to unauthenticate because a user is not currently authenticated or is in the process of unauthenticating"))
-		}
+		} 
 	}
 
 	// MARK: Creating references to entries in the CSync service
