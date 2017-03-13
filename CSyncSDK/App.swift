@@ -164,6 +164,11 @@ public class App : NSObject
 		acls = nil
 		transport.clearSessionInfo()
 
+		if let authCallback = authCallback {
+			authCallback(nil, CSError.requestError as NSError?)
+			self.authCallback = nil;
+		}
+		
 		if transport.canDisconnect {
 			//Store callback to call it when the socket has closed
 			unauthCallback = completionHandler

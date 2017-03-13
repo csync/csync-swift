@@ -106,6 +106,31 @@ class AppTests: XCTestCase {
 		}
 	}
 
+	func testQuickLogins(){
+		let expectation1 = self.expectation(description: "\(#function)")
+
+		//Grab the CSync Config
+		let config = getConfig()
+		let app = App(host: config.host, port: config.port, options: config.options)
+		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+			XCTAssert(error?.code == 4 && authData == nil)
+		}
+		app.unauth(){ error in
+			XCTAssert(error == nil)
+			app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+				if error == nil && authData != nil {
+					expectation1.fulfill()
+				}
+			}
+		}
+		//Wait for expecations
+		waitForExpectations(timeout: 10.0) { (error) -> Void in
+			if error != nil {
+				print("")
+			}
+		}
+	}
+
 	func testUnauthCompletionHandler(){
 		let expectation1 = self.expectation(description: "\(#function)")
 
