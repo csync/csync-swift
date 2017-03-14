@@ -296,7 +296,7 @@ class WriteTests: XCTestCase {
 			let writeKey7 = app.key("tests.DeleteWildcard." + uuid + "a.*")
 			writeKey7.delete()
 		}
-		waitForExpectations(timeout: 20.0, handler:nil)
+		waitForExpectations(timeout: 30.0, handler:nil)
 	}
 
 	func testDeleteWildcardInMiddle(){
@@ -344,7 +344,7 @@ class WriteTests: XCTestCase {
 			let writeKey7 = app.key("tests.DeleteWildcardInMiddle." + uuid + "a.*.e")
 			writeKey7.delete()
 		}
-		waitForExpectations(timeout: 20.0, handler:nil)
+		waitForExpectations(timeout: 30.0, handler:nil)
 	}
 
 	func testDeleteNonexistantWildcard(){
@@ -361,7 +361,7 @@ class WriteTests: XCTestCase {
 			}
 
 		}
-		waitForExpectations(timeout: 10.0, handler:nil)
+		waitForExpectations(timeout: 20.0, handler:nil)
 	}
 
 }
