@@ -156,21 +156,25 @@ class AppTests: XCTestCase {
 		}
 	}
 
-	func testUnauthCompletionHandlerError(){
+	func testUnauthAlwaysReturns(){
 		let expectation1 = self.expectation(description: "\(#function)")
-
+		let expectation2 = self.expectation(description: "\(#function)")
 		//Grab the CSync Config
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
 
 		//Authenticate
 		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
-			//unauth twice so the second one should send a currently in process of unauthing error
-			app.unauth()
-			app.unauth(){ error in
-				//Check to be sure the correct error was sent.
-				if error?.code == CSError.authenticationError.rawValue {
+			//unauth twice so the second one should always return
+			app.unauth() { error in
+				if(error == nil){
 					expectation1.fulfill()
+				}
+			}
+			app.unauth(){ error in
+				//Check to be sure no error was sent but it returned
+				if(error == nil){
+					expectation2.fulfill()
 				}
 			}
 		}
