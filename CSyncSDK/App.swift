@@ -409,8 +409,11 @@ public class App : NSObject
 	{
 		do {
 			let dbValues = try Latest.values(in: database, for:key)
+			//Only deliver keys that still exist at this moment.
 			for value in dbValues {
-				key.deliver(value)
+				if value.exists == true {
+					key.deliver(value)
+				}
 			}
 		} catch let err as Any {
 			logger.error("deliverFromDB failed: \(err)")
