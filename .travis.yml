@@ -1,7 +1,7 @@
 language: objective-c
 xcode_project: CSyncSDK.xcodeproj # path to your xcodeproj folder
 xcode_scheme: CSyncSDK-iOS
-osx_image: xcode8.2
+osx_image: xcode8.3
 before_script: 
   - carthage update
   - /usr/libexec/PlistBuddy -c "Set CSYNC_HOST $CSYNC_HOST" CSyncSDKTests/Config.plist
