@@ -156,6 +156,73 @@ class ListenTests: XCTestCase {
 
 		waitForExpectations(timeout: 10.0, handler:nil)
 	}
+
+	func testNotRecieveLastValueIfDelete(){
+
+		//listens to a key, writes to it, then deletes it.
+		//Once we get the delete, we stop listening then start listening again. Since it is a delete, we should not recieve it when we start listening again.
+		let expectation = self.expectation(description: "\(#function)")
+
+		// Connect to the CSync store
+		let config = getConfig()
+		let app = App(host: config.host, port: config.port, options: config.options)
+		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		}
+		let uuid = UUID().uuidString
+		let testKey = app.key("tests.deletemultipleListens."+uuid)
+
+		testKey.listen { (value, error) -> () in
+			if value?.exists == false {
+				testKey.unlisten()
+				expectation.fulfill()
+			}
+			else {
+				testKey.delete()
+			}
+		}
+		after(1){
+			testKey.write("abc")
+		}
+		wait(for: [expectation], timeout: 20)
+		let expectationTwo = self.expectation(description: "\(#function)")
+		let testKeyTwo = app.key("tests.deletemultipleListens."+uuid)
+		testKeyTwo.listen{ (value, error) -> () in
+			XCTAssertTrue(false)
+		}
+		after(5){expectationTwo.fulfill()}
+		wait(for: [expectationTwo], timeout: 10)
+
+	}
+
+	func testRecieveLastValueIfExists(){
+
+		//listens to a key, writes to it
+		//Once we get the write we stop listening then start listening again. Since it is a write, we should recieve it when we start listening again.
+		let expectation = self.expectation(description: "\(#function)")
+
+		// Connect to the CSync store
+		let config = getConfig()
+		let app = App(host: config.host, port: config.port, options: config.options)
+		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		}
+		let uuid = UUID().uuidString
+		let testKey = app.key("tests.recievemultipleListens."+uuid)
+
+		testKey.listen { (value, error) -> () in
+			testKey.unlisten()
+			expectation.fulfill()
+
+		}
+		testKey.write("abc")
+		wait(for: [expectation], timeout: 10)
+		let expectationTwo = self.expectation(description: "\(#function)")
+		let testKeyTwo = app.key("tests.recievemultipleListens."+uuid)
+		testKeyTwo.listen{ (value, error) -> () in
+			expectationTwo.fulfill()
+		}
+		wait(for: [expectationTwo], timeout: 10)
+		
+	}
 /*
 	func testListenNullData() {
 		let expectation = expectationWithDescription("\(#function)")
