@@ -157,6 +157,8 @@ class ListenTests: XCTestCase {
 		waitForExpectations(timeout: 10.0, handler:nil)
 	}
 
+	//Only run these tests if we support the new apis
+	#if swift(>=3.1)
 	func testNotRecieveLastValueIfDelete(){
 
 		//listens to a key, writes to it, then deletes it.
@@ -223,6 +225,8 @@ class ListenTests: XCTestCase {
 		wait(for: [expectationTwo], timeout: 10)
 		
 	}
+
+	#endif
 /*
 	func testListenNullData() {
 		let expectation = expectationWithDescription("\(#function)")
