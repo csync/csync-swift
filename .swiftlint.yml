@@ -4,6 +4,7 @@ disabled_rules: # rule identifiers to exclude from running
   - todo
   - function_body_length
   - valid_docs
+  - identifier_name
 excluded: # paths to ignore during linting.
   - Carthage
 
