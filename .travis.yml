@@ -11,8 +11,6 @@ before_script:
 script: 
   - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='10.3' clean test
   - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='9.3' clean test
-  - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-tvOS -destination platform='tvOS Simulator',name='Apple TV 1080p',OS='10.2' clean test
-  - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-OSX -destination platform='macOS' clean test
 branches:
   only:
   - master
