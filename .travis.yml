@@ -1,7 +1,7 @@
 language: objective-c
 xcode_project: CSyncSDK.xcodeproj # path to your xcodeproj folder
 xcode_scheme: CSyncSDK-iOS
-osx_image: xcode8.2
+osx_image: xcode8.3
 before_script: 
   - carthage update
   - /usr/libexec/PlistBuddy -c "Set CSYNC_HOST $CSYNC_HOST" CSyncSDKTests/Config.plist
@@ -9,7 +9,8 @@ before_script:
   - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_PROVIDER $CSYNC_DEMO_PROVIDER" CSyncSDKTests/Config.plist
   - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_TOKEN $CSYNC_DEMO_TOKEN" CSyncSDKTests/Config.plist
 script: 
-  - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='10.1' clean test
+  - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='10.3' clean test
+  - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='9.3' clean test
 branches:
   only:
   - master

@@ -75,7 +75,7 @@ class AppTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate("facebook", token: "fbtoken") { authData, error in
+		app.authenticate("Iamnotarealprovider", token: "fbtoken") { authData, error in
 			XCTAssertNotNil(error)
 			expectation.fulfill()
 		}
