@@ -94,7 +94,7 @@ for up to date installation instructions.
 Add the following to your Cartfile:
 
 ```
-git "git@github.com:csync/csync-swift.git" "master"
+github "csync/csync-swift" ~> 1.3.0
 ```
 
 Then run `carthage update`.
