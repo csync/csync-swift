@@ -111,6 +111,20 @@ The `import CSyncSDK` directive is required in order to access CSync APIs.
 Applications use the CSync class to create a connection to a specific CSync service.
 
     let app = App(host: "localhost", port: 6005)
+    
+## Authenticating
+```
+app.authenticate("demo", token: "demoToken") { authData, error in
+    guard error == nil else {
+        // Error Authenticating
+    }
+    /* Auth Data contains:
+    uid:  a unique user id across all providers, 
+    token: "demoToken" in this example,
+    provider: "demo" in this example,
+    expires: seconds since epoch as an int */
+}
+```
 
 ## Listening to values on a key
 
