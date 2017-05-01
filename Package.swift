@@ -10,8 +10,8 @@ let package = Package(
     exclude: ["Tests/CSyncSDKTests/ObjCTests.m"]
 )
 
-// Copy test config file
+// Copy test config file (macOS only)
 let task = Process()
 task.launchPath = "/usr/bin/env"
-task.arguments = ["cp", "Tests/CSyncSDKTests/Config.plist", ".build/debug/CSyncSDKPackageTests.xctest/Resources"]
+task.arguments = ["ditto", "Tests/CSyncSDKTests/Config.plist", ".build/debug/CSyncSDKPackageTests.xctest/Contents/Resources/"]
 task.launch()

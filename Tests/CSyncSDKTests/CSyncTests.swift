@@ -22,14 +22,13 @@ struct Config {let host: String; let port: Int; let authenticationProvider: Stri
  * The Config.plist file is used to set configuration parameters for the CSyncSDKTests.
  */
 func getConfig() -> Config {
-    print(FileManager.default.currentDirectoryPath)
-    let configPlist = Bundle(for: CSyncTests.self).path(forResource: "Config", ofType: "plist") ?? FileManager.default.currentDirectoryPath + "/Tests/CSyncSDKTests/Config.plist"
-	let configDict = NSDictionary(contentsOfFile:configPlist)
+    let configPlist = Bundle(for: CSyncTests.self).path(forResource: "Config", ofType: "plist")
+	let configDict = configPlist.map { plist in NSDictionary(contentsOfFile:plist) }
 
-	guard let host = configDict?["CSYNC_HOST"] as? String,
-		let port = configDict?["CSYNC_PORT"] as? Int,
-		let authenticationProvider = configDict?["CSYNC_DEMO_PROVIDER"] as? String,
-		let token = configDict?["CSYNC_DEMO_TOKEN"] as? String else{
+	guard let host = configDict??["CSYNC_HOST"] as? String,
+		let port = configDict??["CSYNC_PORT"] as? Int,
+		let authenticationProvider = configDict??["CSYNC_DEMO_PROVIDER"] as? String,
+		let token = configDict??["CSYNC_DEMO_TOKEN"] as? String else{
 			fatalError("Unable to find CSync config information, please specify in Config.plist")
 	}
 
