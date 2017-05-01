@@ -30,7 +30,7 @@ Contextual Sync (CSync) is an open source, real-time, continuous data synchroniz
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'CSyncSDK/**/*'
+  s.source_files = 'Source/**/*'
   
   # s.resource_bundles = {
   #   'csync-swift' => ['csync-swift/Assets/*.png']
