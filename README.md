@@ -2,7 +2,8 @@
 
 [![Build Status - Master](https://travis-ci.org/csync/csync-swift.svg?branch=master)](https://travis-ci.org/csync/csync-swift)
 [![Carthage compatible][carthage-svg]][carthage-link]
-[![CocoPods][coco-svg]][coco-link]
+[![CocoaPods][coco-svg]][coco-link]
+[![SPM][spm-svg]][spm-link]
 [![License][license-svg]][license-link]
 
 [carthage-svg]: https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat
@@ -10,6 +11,9 @@
 
 [coco-svg]: https://img.shields.io/cocoapods/v/csync-swift.svg
 [coco-link]: https://cocoapods.org/pods/csync-swift
+
+[spm-svg]: https://img.shields.io/badge/SPM-compatible-brightgreen.svg
+[spm-link]: https://github.com/apple/swift-package-manager
 
 [license-svg]: https://img.shields.io/hexpm/l/plug.svg
 [license-link]: https://github.com/csync/csync-swift/blob/master/LICENSE
