@@ -87,7 +87,9 @@ CSync provides eight "static" ACLs that can be used to provide any combination o
 
 The ACL for a key is set when the key is created by the first write performed to the key. If the write operation specified an ACL, then this ACL is attached to the key. If no ACL was specified in the write, then the key inherits the ACL from its closest ancestor in the key space—its parent if the parent exists, else its grandparent if that key exists, possibly all the way back to the root key. The ACL of the root key is `PublicCreate`, which permits any user to create a child key but does not allow public read or write access.
 
-# Getting Started
+# Installation
+CSync supports installation with Carthage, CocoaPods, or the Swift Package Manger.
+## Carthage
 Use [Carthage] to include `CSync` into your iOS, macOS, or tvOS app.
 Follow the current instructions in [Carthage's README][carthage-installation]
 for up to date installation instructions.
@@ -95,17 +97,41 @@ for up to date installation instructions.
 [Carthage]: https://github.com/Carthage/Carthage
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
-Add the following to your Cartfile:
+Add the following to your `Cartfile`:
 
 ```
-github "csync/csync-swift" ~> 1.3.0
+github "csync/csync-swift" ~> 1.4.0
 ```
 
 Then run `carthage update`.
 
-The `import CSyncSDK` directive is required in order to access CSync APIs.
+## CocoaPods
+Visit the [official CocoPods website](https://cocoapods.org/) for up to date details on how to install.
 
-#Usage
+Add the following to your `Podfile`:
+
+`pod 'csync-swift', '~> 1.4.0'`
+
+Then run `pod install`
+
+## Swift Package Manager
+The Swift Package Manager is included as part of XCode.
+
+Add the following to your `Package.swift`:
+
+```
+dependencies: [
+        .Package(url: "https://github.com/csync/csync-swift.git", majorVersion: 1, minor: 4)
+]
+```
+
+Then compile your application with the following command:
+
+`swift build -Xlinker -lsqlite3 -Xlinker -lz`
+
+# Usage
+
+The `import CSyncSDK` directive is required in order to access CSync APIs.
 
 ## Connecting to a CSync store
 Applications use the CSync class to create a connection to a specific CSync service.
