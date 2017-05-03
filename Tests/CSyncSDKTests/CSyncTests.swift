@@ -22,7 +22,7 @@ struct Config {let host: String; let port: Int; let authenticationProvider: Stri
  * The Config.plist file is used to set configuration parameters for the CSyncSDKTests.
  */
 func getConfig() -> Config {
-	let configPlist = Bundle(identifier:"com.ibm.CSyncSDKTests")?.path(forResource: "Config", ofType: "plist")
+    let configPlist = Bundle(for: CSyncTests.self).path(forResource: "Config", ofType: "plist")
 	let configDict = configPlist.map { plist in NSDictionary(contentsOfFile:plist) }
 
 	guard let host = configDict??["CSYNC_HOST"] as? String,

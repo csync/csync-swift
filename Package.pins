@@ -1,0 +1,24 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "CSQLite",
+      "reason": null,
+      "repositoryURL": "https://github.com/stephencelis/CSQLite.git",
+      "version": "0.0.2"
+    },
+    {
+      "package": "SQLite",
+      "reason": null,
+      "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
+      "version": "0.11.3"
+    },
+    {
+      "package": "SwiftWebSocket",
+      "reason": null,
+      "repositoryURL": "https://github.com/tidwall/SwiftWebSocket.git",
+      "version": "2.6.5"
+    }
+  ],
+  "version": 1
+}

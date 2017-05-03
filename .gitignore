@@ -10,3 +10,7 @@ Carthage/
 ## jazzy
 build
 docs
+
+## SPM
+.build/
+Packages/
