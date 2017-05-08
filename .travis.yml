@@ -4,10 +4,10 @@ xcode_scheme: CSyncSDK-iOS
 osx_image: xcode8.3
 before_script: 
   - carthage update
-  - /usr/libexec/PlistBuddy -c "Set CSYNC_HOST $CSYNC_HOST" CSyncSDKTests/Config.plist
-  - /usr/libexec/PlistBuddy -c "Set CSYNC_PORT $CSYNC_PORT" CSyncSDKTests/Config.plist
-  - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_PROVIDER $CSYNC_DEMO_PROVIDER" CSyncSDKTests/Config.plist
-  - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_TOKEN $CSYNC_DEMO_TOKEN" CSyncSDKTests/Config.plist
+  - /usr/libexec/PlistBuddy -c "Set CSYNC_HOST $CSYNC_HOST" Tests/CSyncSDKTests/Config.plist
+  - /usr/libexec/PlistBuddy -c "Set CSYNC_PORT $CSYNC_PORT" Tests/CSyncSDKTests/Config.plist
+  - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_PROVIDER $CSYNC_DEMO_PROVIDER" Tests/CSyncSDKTests/Config.plist
+  - /usr/libexec/PlistBuddy -c "Set CSYNC_DEMO_TOKEN $CSYNC_DEMO_TOKEN" Tests/CSyncSDKTests/Config.plist
 script: 
   - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='10.3' clean test
   - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='9.3' clean test

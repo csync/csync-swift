@@ -258,44 +258,27 @@ class WriteTests: XCTestCase {
 		let app = App(host: config.host, port: config.port, options: config.options)
 		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
 			//Check to be sure the right 3 keys are deleted
-			var keyOne = false, keyTwo = false, keyThree = false
 			let listenKey = app.key("tests.DeleteWildcard." + uuid + ".a.*")
+			let writeKey2 = app.key("tests.DeleteWildcard." + uuid + ".b.e")
+			writeKey2.write("be")
 			let writeKey = app.key("tests.DeleteWildcard." + uuid + ".a.b")
 			writeKey.write("b")
-			let writeKey2 = app.key("tests.DeleteWildcard." + uuid + ".a.c")
-			writeKey2.write("c")
-			let writeKey3 = app.key("tests.DeleteWildcard." + uuid + ".a.d")
-			writeKey3.write("d")
-			let writeKey4 = app.key("tests.DeleteWildcard." + uuid + ".b.e")
-			writeKey4.write("be")
-			let writeKey5 = app.key("tests.DeleteWildcard." + uuid + ".a.e.f")
-			writeKey5.write("aef")
-			let writeKey6 = app.key("tests.DeleteWildcard." + uuid + ".b.a.g")
-			writeKey6.write("bag")
 			listenKey.listen { (value, error) -> () in
 				if let key = value?.key {
-					if key == "tests.DeleteWildcard." + uuid + ".a.b" && (value?.exists)! == false {
-						keyOne = true
-					} else if key == "tests.DeleteWildcard." + uuid + ".a.c" && value?.exists == false {
-						keyTwo = true
-					} else if key == "tests.DeleteWildcard." + uuid + ".a.d" && value?.exists == false {
-						keyThree = true
+					if key == "tests.DeleteWildcard." + uuid + ".a.b"{
+						if value?.exists == false {
+							expectation.fulfill()
+						}
+						else {
+							let wildCardDelete = app.key("tests.DeleteWildcard." + uuid + ".a.*")
+							wildCardDelete.delete()
+						}
 					} else if key == "tests.DeleteWildcard." + uuid + ".b.e" && value?.exists == false {
 						XCTFail("a.* delete should not delete b.e")
-					} else if key == "tests.DeleteWildcard." + uuid + ".a.e.f" && value?.exists == false {
-						XCTFail("a.* delete should not delete a.e.f")
-					} else if key == "tests.DeleteWildcard." + uuid + ".b.a.g" && value?.exists == false {
-						XCTFail("a.* delete should not delete b.a.g")
-					}
-					//If all three keys that we expected to get deleted were deleted, pass
-					if keyOne && keyTwo && keyThree {
-						expectation.fulfill()
 					}
 				}
+				self.keyToDelete = app.key("tests.DeleteWildcard." + uuid + ".#")
 			}
-            let writeKey7 = app.key("tests.DeleteWildcard." + uuid + ".a.*")
-            writeKey7.delete()
-			self.keyToDelete = app.key("tests.DeleteWildcard." + uuid + ".#")
 		}
 		waitForExpectations(timeout: 30.0, handler:nil)
 	}
@@ -307,43 +290,26 @@ class WriteTests: XCTestCase {
 		let app = App(host: config.host, port: config.port, options: config.options)
 		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
 			//Check to be sure the right 3 keys are deleted
-			var keyOne = false, keyTwo = false, keyThree = false
 			let listenKey = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.*.e")
+			let writeKey2 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.b.d")
+			writeKey2.write("c")
 			let writeKey = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.b.e")
 			writeKey.write("b")
-			let writeKey2 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.c.e")
-			writeKey2.write("c")
-			let writeKey3 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.d.e")
-			writeKey3.write("d")
-			let writeKey4 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".b.e.e")
-			writeKey4.write("be")
-			let writeKey5 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.e.e.f")
-			writeKey5.write("aef")
-			let writeKey6 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".b.a.e.g")
-			writeKey6.write("bag")
 			listenKey.listen { (value, error) -> () in
 				if let key = value?.key {
-					if key == "tests.DeleteWildcardInMiddle." + uuid + ".a.b.e" && (value?.exists)! == false {
-						keyOne = true
-					} else if key == "tests.DeleteWildcardInMiddle." + uuid + ".a.c.e" && value?.exists == false {
-						keyTwo = true
-					} else if key == "tests.DeleteWildcardInMiddle." + uuid + ".a.d.e" && value?.exists == false {
-						keyThree = true
-					} else if key == "tests.DeleteWildcardInMiddle." + uuid + ".b.e.e" && value?.exists == false {
-						XCTFail("a.* delete should not delete b.e")
-					} else if key == "tests.DeleteWildcardInMiddle." + uuid + ".a.e.e.f" && value?.exists == false {
-						XCTFail("a.* delete should not delete a.e.f")
-					} else if key == "tests.DeleteWildcardInMiddle." + uuid + ".b.a.e.g" && value?.exists == false {
-						XCTFail("a.* delete should not delete b.a.g")
-					}
-					//If all three keys that we expected to get deleted were deleted, pass
-					if keyOne && keyTwo && keyThree {
-						expectation.fulfill()
+					if key == "tests.DeleteWildcardInMiddle." + uuid + ".a.b.e"  {
+						if value?.exists == false {
+							expectation.fulfill()
+						}
+						else {
+							let wildCardDelete = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.*.e")
+							wildCardDelete.delete()
+						}
+					} else if key == "tests.DeleteWildcardInMiddle." + uuid + ".a.b.d" && value?.exists == false {
+						XCTFail("a.*.e delete should not delete a.b.d")
 					}
 				}
 			}
-			let writeKey7 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.*.e")
-			writeKey7.delete()
             self.keyToDelete = app.key("tests.DeleteWildcardInMiddle." + uuid + ".#")
 		}
 		waitForExpectations(timeout: 30.0, handler:nil)
