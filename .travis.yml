@@ -11,6 +11,11 @@ before_script:
 script: 
   - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='10.3' clean test
   - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-iOS -destination platform='iOS Simulator',name='iPhone 6',OS='9.3' clean test
+  - xcodebuild -project CSyncSDK.xcodeproj -scheme CSyncSDK-OSX -destination platform='macOS' clean test
+  - swift -version
+  - swift build -Xlinker -lsqlite3 -Xlinker -lz
+  - swift test -Xlinker -lsqlite3 -Xlinker -lz
+  - pod spec lint --allow-warnings
 branches:
   only:
   - master
