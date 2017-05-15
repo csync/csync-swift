@@ -45,14 +45,14 @@ class WriteTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 		let testKey = app.key(testKeyString("\(#function)"))
 
 		//delete this key in the teardown
 		keyToDelete=testKey
 
-		testKey.write("value")  { key, error in
+		testKey.write("value")  { _, error in
 			XCTAssertNil(error)
 			expectation.fulfill()
 		}
@@ -66,7 +66,7 @@ class WriteTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey = app.key(testKeyString("\(#function)"))
@@ -74,7 +74,7 @@ class WriteTests: XCTestCase {
 		//delete this key in the teardown
 		keyToDelete=testKey
 
-		testKey.listen { (value, error) -> () in
+		testKey.listen { (value, error) in
 			XCTAssertNil(error)
 			XCTAssertEqual(value!.key, testKey.key)
 			expectation.fulfill()
@@ -92,7 +92,7 @@ class WriteTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey = app.key(testKeyString("\(#function)"))
@@ -100,7 +100,7 @@ class WriteTests: XCTestCase {
 		//delete this key in the teardown
 		keyToDelete=testKey
 
-		testKey.listen { (value, error) -> () in
+		testKey.listen { (value, error) in
 			XCTAssertNil(error)
 			XCTAssertEqual(value!.key, testKey.key)
 			expectation.fulfill()
@@ -118,14 +118,14 @@ class WriteTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey = app.key(testKeyString("\(#function)"))
 
 		var gotListen = false, gotCompletion = false
 
-		testKey.listen { (value, error) -> () in
+		testKey.listen { (value, error) in
 			XCTAssertNil(error)
 			XCTAssertEqual(value!.key, testKey.key)
 			gotListen = !value!.exists
@@ -136,9 +136,9 @@ class WriteTests: XCTestCase {
 			}
 		}
 
-		testKey.write("data")   { key, error in
+		testKey.write("data")   { _, error in
 			XCTAssertNil(error)
-			testKey.delete() { key, error in
+			testKey.delete { _, error in
 				XCTAssertNil(error)
 				gotCompletion = true
 				if gotListen && gotCompletion {
@@ -158,12 +158,12 @@ class WriteTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey = app.key(testKeyString("\(#function)"))
 
-		testKey.listen { (value, error) -> () in
+		testKey.listen { (value, error) in
 			XCTAssertNil(error)
 			XCTAssertEqual(value!.key, testKey.key)
 			if value!.exists == false {
@@ -173,7 +173,7 @@ class WriteTests: XCTestCase {
 			}
 		}
 
-		testKey.write("data")   { key, error in
+		testKey.write("data") { _, error in
 			XCTAssertNil(error)
 			// How to call delete with a nil completionHandler?
 			// testKey.delete(completionHandler: nil) // build error - Argument labels do not match
@@ -192,12 +192,12 @@ class WriteTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey = app.key(testKeyString("\(#function)"))
 
-		testKey.listen { (value, error) -> () in
+		testKey.listen { (value, error) in
 			XCTAssertNil(error)
 			XCTAssertEqual(value!.key, testKey.key)
 			if value!.exists == false {
@@ -207,7 +207,7 @@ class WriteTests: XCTestCase {
 			}
 		}
 
-		testKey.write("data")   { key, error in
+		testKey.write("data")   { _, error in
 			XCTAssertNil(error)
 			testKey.delete()
 		}
@@ -221,11 +221,11 @@ class WriteTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey = app.key(testKeyString("\(#function)")+".*")
-		testKey.delete() {key, error in
+		testKey.delete {_, error in
 			// Wildcard deletes should always return success, even if nothing was deleted
 			assert(error == nil)
 			expectation.fulfill()
@@ -239,11 +239,11 @@ class WriteTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey = app.key(testKeyString("\(#function)"))
-		testKey.delete() {key, error in
+		testKey.delete {_, error in
 			// Single Key deletes will return an error if you delete something that doesn't exist.
 			assert(error?.code == CSError.requestError.rawValue)
 			expectation.fulfill()
@@ -256,20 +256,19 @@ class WriteTests: XCTestCase {
 		let config = getConfig()
 		let uuid = UUID().uuidString
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 			//Check to be sure the right 3 keys are deleted
 			let listenKey = app.key("tests.DeleteWildcard." + uuid + ".a.*")
 			let writeKey2 = app.key("tests.DeleteWildcard." + uuid + ".b.e")
 			writeKey2.write("be")
 			let writeKey = app.key("tests.DeleteWildcard." + uuid + ".a.b")
 			writeKey.write("b")
-			listenKey.listen { (value, error) -> () in
+			listenKey.listen { (value, _) in
 				if let key = value?.key {
 					if key == "tests.DeleteWildcard." + uuid + ".a.b"{
 						if value?.exists == false {
 							expectation.fulfill()
-						}
-						else {
+						} else {
 							let wildCardDelete = app.key("tests.DeleteWildcard." + uuid + ".a.*")
 							wildCardDelete.delete()
 						}
@@ -288,20 +287,19 @@ class WriteTests: XCTestCase {
 		let config = getConfig()
 		let uuid = UUID().uuidString
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 			//Check to be sure the right 3 keys are deleted
 			let listenKey = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.*.e")
 			let writeKey2 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.b.d")
 			writeKey2.write("c")
 			let writeKey = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.b.e")
 			writeKey.write("b")
-			listenKey.listen { (value, error) -> () in
+			listenKey.listen { (value, _) in
 				if let key = value?.key {
 					if key == "tests.DeleteWildcardInMiddle." + uuid + ".a.b.e"  {
 						if value?.exists == false {
 							expectation.fulfill()
-						}
-						else {
+						} else {
 							let wildCardDelete = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.*.e")
 							wildCardDelete.delete()
 						}
@@ -320,9 +318,9 @@ class WriteTests: XCTestCase {
 		let expectation = self.expectation(description: "\(#function)")
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, error in
 			let writeKey7 = app.key("tests.DeleteNonexistantWildcard.*")
-			writeKey7.delete(){ key, error in
+			writeKey7.delete { key, error in
 				assert(error == nil)
 				assert(key.key == "tests.DeleteNonexistantWildcard.*")
 				expectation.fulfill()

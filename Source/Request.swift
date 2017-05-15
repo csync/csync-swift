@@ -118,7 +118,7 @@ class Request
 			"version" : MESSAGE_VERSION ]
 		do {
 			let data = try JSONSerialization.data(withJSONObject: msgDict, options: JSONSerialization.WritingOptions(rawValue: 0))
-			let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String
+			let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String?
 			return string
 		} catch let error as NSError {
 			self.logger.error("Error serializing JSON message: \(error.localizedDescription)")

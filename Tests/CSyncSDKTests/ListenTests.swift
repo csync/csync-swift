@@ -47,7 +47,7 @@ class ListenTests: XCTestCase {
 		let app = App(host: config.host, port: config.port, options: config.options)
 
 		var uid : String! = nil
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { authData, _ in
 			uid = authData?.uid
 		}
 
@@ -57,7 +57,7 @@ class ListenTests: XCTestCase {
 		//delete this key in the teardown
 		keyToDelete=writeKey
 
-		listenKey.listen { (value, error) -> () in
+		listenKey.listen { (value, error) in
 			XCTAssertNil(error)
 			if let key = value?.key, key == writeKey.key {
 				XCTAssertEqual(value!.creator, uid)
@@ -67,7 +67,7 @@ class ListenTests: XCTestCase {
 		}
 
 		after(1.0) {
-			writeKey.write("stuff")  { key, error in
+			writeKey.write("stuff")  { _, error in
 				XCTAssertNil(error)
 			}
 		}
@@ -81,7 +81,7 @@ class ListenTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey1 = app.key("tests.multipleListensOnKey."+UUID().uuidString)
@@ -92,13 +92,13 @@ class ListenTests: XCTestCase {
 		let testKey2 = app.key(testKey1.key)
 
 		let writer = { (data: String) in
-			testKey1.write(data)  { key, error in
+			testKey1.write(data)  { _, error in
 				XCTAssertNil(error)
 			}
 		}
 
 		var count = 0
-		let listener = { (value: Value?, error: NSError?) -> () in
+		let listener = { (value: Value?, error: NSError?) in
 			XCTAssertNil(error)
 			count += 1
 			if count == 2 {
@@ -125,14 +125,14 @@ class ListenTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
 		let testKey = app.key("tests.repeatListensOnKey."+UUID().uuidString)
 
 		var count = 0
-		var listener = { (value: Value?, error: NSError?) -> () in }
-		listener = { (value: Value?, error: NSError?) -> () in
+		var listener = { (value: Value?, error: NSError?) in }
+		listener = { (value: Value?, error: NSError?) in
 			XCTAssertNil(error)
 			XCTAssertEqual(value!.data!, "data")
 			count += 1
@@ -150,7 +150,7 @@ class ListenTests: XCTestCase {
 		//delete this key in the teardown
 		keyToDelete=testKey
 
-		testKey.write("data")  { key, error in
+		testKey.write("data")  { _, error in
 			XCTAssertNil(error)
 		}
 
@@ -168,17 +168,16 @@ class ListenTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 		let uuid = UUID().uuidString
 		let testKey = app.key("tests.deletemultipleListens."+uuid)
 
-		testKey.listen { (value, error) -> () in
+		testKey.listen { (value, _) in
 			if value?.exists == false {
 				testKey.unlisten()
 				expectation.fulfill()
-			}
-			else {
+			} else {
 				testKey.delete()
 			}
 		}
@@ -188,7 +187,7 @@ class ListenTests: XCTestCase {
 		wait(for: [expectation], timeout: 20)
 		let expectationTwo = self.expectation(description: "\(#function)")
 		let testKeyTwo = app.key("tests.deletemultipleListens."+uuid)
-		testKeyTwo.listen{ (value, error) -> () in
+		testKeyTwo.listen{ (_, _) in
 			XCTAssertTrue(false)
 		}
 		after(5){expectationTwo.fulfill()}
@@ -205,12 +204,12 @@ class ListenTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 		let uuid = UUID().uuidString
 		let testKey = app.key("tests.recievemultipleListens."+uuid)
 
-		testKey.listen { (value, error) -> () in
+		testKey.listen { (_, _) in
 			testKey.unlisten()
 			expectation.fulfill()
 
@@ -219,11 +218,10 @@ class ListenTests: XCTestCase {
 		wait(for: [expectation], timeout: 10)
 		let expectationTwo = self.expectation(description: "\(#function)")
 		let testKeyTwo = app.key("tests.recievemultipleListens."+uuid)
-		testKeyTwo.listen{ (value, error) -> () in
+		testKeyTwo.listen{ (_, _) in
 			expectationTwo.fulfill()
 		}
 		wait(for: [expectationTwo], timeout: 10)
-		
 	}
 
 	#endif

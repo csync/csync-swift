@@ -241,7 +241,7 @@ open class Key : NSObject
 	- listener:	A callback to receive values for the specified key or key pattern.
 
 	*/
-	open func listen(_ listener:@escaping (_ value: Value?, _ error: NSError?)->()) {
+	open func listen(_ listener:@escaping (_ value: Value?, _ error: NSError?) -> Void) {
 
 		logger.trace("listen for key \(key)")
 
@@ -298,7 +298,7 @@ open class Key : NSObject
 			has accepted or rejected the write
 
 	*/
-	open func write(_ data: String, completionHandler:((_ key: Key, _ error: NSError?)->())?) -> ()
+	open func write(_ data: String, completionHandler:((_ key: Key, _ error: NSError?) -> Void)?)
 	{
 		logger.trace("write for key \(key)")
 
@@ -320,7 +320,7 @@ open class Key : NSObject
 	- data:		The data to be stored and distributed to any clients listening on this key.
 
 	*/
-	open func write(_ data: String) -> ()
+	open func write(_ data: String)
 	{
 		write(data, completionHandler: nil)
 	}
@@ -342,7 +342,7 @@ open class Key : NSObject
 			has accepted or rejected the write
 
 	*/
-	open func write(_ data: String, with acl: ACL, completionHandler:((_ key: Key, _ error: NSError?)->())?) -> ()
+	open func write(_ data: String, with acl: ACL, completionHandler:((_ key: Key, _ error: NSError?) -> Void)?)
 	{
 		logger.trace("write for key \(key)")
 
@@ -368,7 +368,7 @@ open class Key : NSObject
 	- acl:		The access control list specifying the access allowed by other users.
 
 	*/
-	open func write(_ data: String, with acl: ACL) -> ()
+	open func write(_ data: String, with acl: ACL)
 	{
 		write(data, with: acl, completionHandler: nil)
 	}
@@ -386,7 +386,7 @@ open class Key : NSObject
 			has accepted or rejected the delete
 
 	*/
-	open func delete(_ completionHandler:((_ key: Key, _ error: NSError?)->())?) -> ()
+	open func delete(_ completionHandler:((_ key: Key, _ error: NSError?) -> Void)?)
 	{
 		logger.trace("delete for key \(key)")
 
@@ -404,7 +404,7 @@ open class Key : NSObject
 	permission are deleted.
 
 	*/
-	open func delete() -> ()
+	open func delete()
 	{
 		delete(nil)
 	}
@@ -419,7 +419,7 @@ open class Key : NSObject
 
 	private let logger = Logger("Key")
 
-	var listener : ((_ value: Value?, _ error: NSError?)->())?
+	var listener : ((_ value: Value?, _ error: NSError?) -> Void)?
 
 	// Map from (concrete) keystring to highest VTS delivered to this listener
 	// Serialization: This structure should only be accessed on the main queue, just before invoking the

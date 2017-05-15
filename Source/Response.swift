@@ -187,7 +187,7 @@ class Response
 		case .fetch:
 			if let responses = payload["response"] as? [AnyObject] {
 				var values : [Value] = []
-				for (index, _) in responses.enumerated() {
+				for index in responses.indices {
 					if let response = responses[index] as? [String:AnyObject],
 						let keyArr = response["path"] as? [String],
 						let deletePath = response["deletePath"] as? Bool,

@@ -35,7 +35,7 @@ func getConfig() -> Config {
 	return Config(host: host, port: port, authenticationProvider: authenticationProvider, token: token, options:["useSSL":"NO" as AnyObject, "dbInMemory":"YES" as AnyObject])
 }
 
-func after(_ delay:Double, closure:@escaping ()->()) {
+func after(_ delay:Double, closure:@escaping () -> Void) {
 	DispatchQueue.main.asyncAfter(
 		deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
@@ -66,14 +66,13 @@ class CSyncTests: XCTestCase {
 		let app = App(host: "csync-ga6z7rK.mybluemix.net", port: 667)
 
 		let userjwt = "user@pickles.com"
-		app.authenticate("google", token: userjwt) { (authData, error) -> () in
-		}
+		app.authenticate("google", token: userjwt, completionHandler: nil)
 
 		// Listening for values on a key
 
 		let myKey = app.key("a.b.c.d.e")
 
-		myKey.listen() { value, error in
+		myKey.listen { _, error in
 			if error != nil {
 				// handle error
 			}
@@ -82,7 +81,7 @@ class CSyncTests: XCTestCase {
 
 		// Writing a value into the CSync store
 
-		myKey.write("value")  { key, error in
+		myKey.write("value")  { _, error in
 			if error != nil {
 				// handle error
 			}
@@ -91,7 +90,7 @@ class CSyncTests: XCTestCase {
 
 		// Writing a value into the CSync store with a given ACL
 
-		myKey.write("value", with: ACL.PublicReadWrite)  { key, error in
+		myKey.write("value", with: ACL.PublicReadWrite)  { _, error in
 			if error != nil {
 				// handle error
 			}

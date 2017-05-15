@@ -59,7 +59,7 @@ class AclTests: XCTestCase {
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
 
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, error in
 			XCTAssertNil(error)
 			guard error == nil else {
 				return
@@ -73,7 +73,7 @@ class AclTests: XCTestCase {
 
 		let expectedData = "foo"
 
-		testKey.listen { (value, error) -> () in
+		testKey.listen { (value, error) -> Void in
 			XCTAssertNil(error)
 			XCTAssertEqual(value!.acl, ACL.PublicReadWrite.id)
 			XCTAssertEqual(value!.data!, expectedData)

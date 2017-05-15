@@ -34,7 +34,7 @@ class DatabaseTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in }
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in }
 
 		let myKey = app.key("tests.updateLatest."+NSUUID().uuidString)
 
@@ -57,7 +57,7 @@ class DatabaseTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in }
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in }
 
 		let myKey = app.key("tests.getLatest."+NSUUID().uuidString)
 
@@ -89,7 +89,7 @@ class DatabaseTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in }
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in }
 
 		let myKey = app.key("tests.GetLatestWithDelete."+NSUUID().uuidString)
 
@@ -113,7 +113,7 @@ class DatabaseTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in }
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in }
 
 		let myKey = app.key("tests.getLatestWithWildcards."+NSUUID().uuidString)
 
@@ -150,7 +150,7 @@ class DatabaseTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in }
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in }
 
 		let myKey = app.key("tests.InsertLog."+NSUUID().uuidString)
 
@@ -182,7 +182,7 @@ class DatabaseTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in }
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in }
 
 		let myKey1 = app.key("tests.VtsFromLog."+NSUUID().uuidString)
 		let myKey2 = app.key("tests.VtsFromLog."+NSUUID().uuidString)

@@ -61,7 +61,7 @@ class AppTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: "This is a bad token") { authData, error in
+		app.authenticate(config.authenticationProvider, token: "This is a bad token") { _, error in
 			XCTAssertNotNil(error)
 			expectation.fulfill()
 		}
@@ -75,7 +75,7 @@ class AppTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate("Iamnotarealprovider", token: "fbtoken") { authData, error in
+		app.authenticate("Iamnotarealprovider", token: "fbtoken") { _, error in
 			XCTAssertNotNil(error)
 			expectation.fulfill()
 		}
@@ -89,10 +89,10 @@ class AppTests: XCTestCase {
 		//Grab the CSync Config
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, error in
 			app.unauth()
 			//Unauth right away and try to reauth
-			app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+			app.authenticate(config.authenticationProvider, token: config.token) { _, error in
 				if error?.code == CSError.internalError.rawValue {
 					expectation1.fulfill()
 				}
@@ -115,7 +115,7 @@ class AppTests: XCTestCase {
 		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
 			XCTAssert(error?.code == 4 && authData == nil)
 		}
-		app.unauth(){ error in
+		app.unauth { error in
 			XCTAssert(error == nil)
 			app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
 				if error == nil && authData != nil {
@@ -139,9 +139,9 @@ class AppTests: XCTestCase {
 		let app = App(host: config.host, port: config.port, options: config.options)
 
 		//Authenticate
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, error in
 			//unauth and check success
-			app.unauth(){ error in
+			app.unauth { error in
 				//Check to be sure no error was sent
 				if error == nil {
 					expectation1.fulfill()
@@ -164,16 +164,16 @@ class AppTests: XCTestCase {
 		let app = App(host: config.host, port: config.port, options: config.options)
 
 		//Authenticate
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, error in
 			//unauth twice so the second one should always return
-			app.unauth() { error in
-				if(error == nil){
+			app.unauth { error in
+				if error == nil {
 					expectation1.fulfill()
 				}
 			}
-			app.unauth(){ error in
+			app.unauth { error in
 				//Check to be sure no error was sent but it returned
-				if(error == nil){
+				if error == nil {
 					expectation2.fulfill()
 				}
 			}
@@ -222,10 +222,10 @@ class AppTests: XCTestCase {
 		// Set the app's serverUUID to simulate a prior connect to a different server instance
 		app.serverUUID = testKey.lastComponent
 
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, error in
 			XCTAssertNotNil(error)
 
-			testKey.write("value")  { key, error in
+			testKey.write("value")  { _, error in
 				XCTAssertNotNil(error)
 				XCTAssertEqual(error!.code, CSError.badDatabase.rawValue)
 				expect.fulfill()
