@@ -104,7 +104,7 @@ for up to date installation instructions.
 Add the following to your `Cartfile`:
 
 ```
-github "csync/csync-swift" ~> 1.4.0
+github "csync/csync-swift" ~> 1.4.1
 ```
 
 Then run `carthage update`.

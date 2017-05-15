@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'csync-swift'
-  s.version          = '1.4.0'
+  s.version          = '1.4.1'
   s.summary          = 'Contextual Sync (CSync) SDK for iOS/macOS/tvOS'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ Contextual Sync (CSync) is an open source, real-time, continuous data synchroniz
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'CSyncSDK/**/*'
+  s.source_files = 'Source/**/*'
   
   # s.resource_bundles = {
   #   'csync-swift' => ['csync-swift/Assets/*.png']
