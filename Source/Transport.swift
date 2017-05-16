@@ -22,7 +22,7 @@ struct SessionInfo
 	let uuid : String
 	let userid : String
 	let tokenExpires : Int
-    let tokenInfo : [String: AnyObject]
+	let tokenInfo : [String: AnyObject]
 }
 
 class Transport
