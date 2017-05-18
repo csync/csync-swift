@@ -70,6 +70,9 @@ class Response
 	var maxvts : VTS? {
 		return payload["maxvts"] as? VTS
 	}
+	var minvts : VTS? {
+		return payload["minvts"] as? VTS
+	}
 
 	// Expected values for Connect response
 	var uuid : String? {

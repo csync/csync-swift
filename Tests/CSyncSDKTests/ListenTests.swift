@@ -119,6 +119,8 @@ class ListenTests: XCTestCase {
 		waitForExpectations(timeout: 10.0, handler:nil)
 	}
 
+	//Depreciated, should be removed
+	/*
 	func testRepeatListensOnKey() {
 		let expectation = self.expectation(description: "\(#function)")
 
@@ -155,7 +157,7 @@ class ListenTests: XCTestCase {
 		}
 
 		waitForExpectations(timeout: 10.0, handler:nil)
-	}
+	}*/
 
 	//Only run these tests if we support the new apis
 	#if swift(>=3.1)
@@ -195,6 +197,8 @@ class ListenTests: XCTestCase {
 
 	}
 
+	/*
+	Depreciated, should be removed
 	func testRecieveLastValueIfExists(){
 
 		//listens to a key, writes to it
@@ -222,7 +226,7 @@ class ListenTests: XCTestCase {
 			expectationTwo.fulfill()
 		}
 		wait(for: [expectationTwo], timeout: 10)
-	}
+	}*/
 
 	#endif
 /*

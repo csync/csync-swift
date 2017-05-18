@@ -70,4 +70,20 @@ class Log
 		let dbVts = items.filter { item in keyObj.matches(item[key]) }.map { item in item[vts] }
 		return dbVts
 	}
+
+	class func vts(in db: Database, for keyObj: Key, before lvts: VTS) throws -> [VTS]
+	{
+		var query = log.select(vts, key)      // SELECT vts,key FROM latest
+			.filter(vts < lvts)		 // WHERE vts < lvts
+		// restrict query to match all leading non-wildcard key components
+		for (i, k) in keyObj.components.enumerated() {
+			if k == "*" || k == "#" {
+				break
+			}
+			query = query.filter(keys[i] == k)
+		}
+		let items = try db.prepare(query)
+		let dbVts = items.filter { item in keyObj.matches(item[key]) }.map { item in item[vts] }
+		return dbVts
+	}
 }

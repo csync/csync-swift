@@ -93,11 +93,23 @@ class Request
 		return req
 	}
 
-	class func advance(_ key: Key, rvts: VTS) -> Request {
+	class func advance(_ key: Key, rvts: VTS? = nil,  lvts: VTS? = nil, forwardLimit: Int? = nil, backwardLimit: Int? = nil) -> Request {
 		let req = Request(kind: RequestType.advance)
 		req.payload = [
-			"pattern" : key.components as AnyObject,
-			"rvts" : NSNumber(value: rvts as Int64) ]
+			"pattern" : key.components as AnyObject
+		]
+		if let rvts = rvts {
+			req.payload["rvts"] = NSNumber(value:rvts as Int64)
+		}
+		if let lvts = lvts {
+			req.payload["lvts"] = NSNumber(value:lvts as Int64)
+		}
+		if let forwardLimit = forwardLimit {
+			req.payload["forwardLimit"] = NSNumber(value:forwardLimit)
+		}
+		if let backwardLimit = backwardLimit {
+			req.payload["backwardLimit"] = NSNumber(value:backwardLimit)
+		}
 		return req
 	}
 

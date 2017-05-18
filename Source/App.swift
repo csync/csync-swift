@@ -218,7 +218,11 @@ public class App : NSObject
 	var transport : Transport!
 	var database : Database!
 
-	var rvts : [String:VTS] = [:]
+	var vts : [String:(lvts:VTS, rvts: VTS)] = [:]
+	var backListeners: [String: [Key]] = [:]
+
+
+	private var countLock : AnyObject = NSObject()
 
 	var acls : [String]?
 
@@ -239,7 +243,6 @@ public class App : NSObject
 	func handleConnect(_ sessionInfo: SessionInfo?, error: NSError?)
 	{
 		logger.trace("Entry to app.handleConnect")
-
 		func scheduleAuthCallback(_ authData: AuthData?, error: NSError?) {
 			if let callback = authCallback {
 				authCallback = nil
@@ -390,9 +393,9 @@ public class App : NSObject
 		}
 		objc_sync_exit(self.listeners)
 
-		DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: {
+		/*DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: {
 			self.deliverFromDB(keyObj)
-		})
+		})*/
 
 		if newListener {
 			// Send listen request to the server
@@ -400,7 +403,7 @@ public class App : NSObject
 			addOperation(subOp)
 
 			// Also kick off an advance
-			startAdvance(keyObj)
+			startAdvance(forKey: keyObj)
 		}
 	}
 
@@ -462,7 +465,7 @@ public class App : NSObject
 		return false
 	}
 
-	func startAdvance(_ key: Key)
+	func startAdvance(forKey key: Key)
 	{
 		logger.trace("Starting advance for \(key.key)")
 

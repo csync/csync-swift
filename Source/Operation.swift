@@ -269,7 +269,8 @@ class GetAclsOperation : Operation
 class AdvanceOperation : Operation
 {
 	let key : Key
-	var rvts : VTS!
+	var rvts : VTS?
+	var lvts : VTS?
 
 	var fetchScheduled = false
 
@@ -290,9 +291,23 @@ class AdvanceOperation : Operation
 			return nil
 		}
 
-		rvts = app.rvts[key.key] ?? 0
-		let request = Request.advance(key, rvts: rvts)
-		return request
+		rvts = app.vts[key.key]?.rvts ?? nil
+		lvts = app.vts[key.key]?.lvts ?? nil
+
+		var amount = 0
+		if let backListeners = app.backListeners[key.key]{
+			for key in backListeners {
+				amount = max(amount, key.outstandingBackwardsValues)
+			}
+		}
+		if amount > 0 {
+			let request = Request.advance(key, rvts: rvts, lvts: lvts, backwardLimit: amount)
+			return request
+		}
+		else {
+			let request = Request.advance(key, rvts: rvts)
+			return request
+		}
 	}
 
 	override func processResponse(_ response: Response?, error: NSError?)
@@ -308,31 +323,75 @@ class AdvanceOperation : Operation
 
 		app.stats.advanceOps += 1
 
-		let rvtsPrime = response.maxvts ?? response.vts.max() ?? rvts!
+		//Get lvtsprime and rvtsprime of response
+		//If we have stuff to fetch, update lvts and rvts after fetch, otherwise update it now
 
-		if response.vts.count > 0 {
-			let dbVts : [VTS]
-			do {
-				dbVts = try Log.vts(in: app.database, for: key, after: rvts)
-			} catch let err as Any {
-				logger.error("Advance:processResponse failed: \(err)")
-				return
-			}
+		//Else
+		if true { //Advance normally
+			let rvtsPrime = response.maxvts ?? response.vts.max() ?? rvts ?? 0
 
-			let vtsToFetch = response.vts.filter { v in !dbVts.contains(v) }
+			if response.vts.count > 0 {
+				var dbVts : [VTS] = []
+				do {
+					let forwardDBVTS = try Log.vts(in: app.database, for: key, after: rvts ?? 0)
+					dbVts += forwardDBVTS
+				} catch let err as Any {
+					logger.error("Advance:processResponse failed: \(err)")
+					return
+				}
+				do {
+					let backwardDBVTS = try Log.vts(in: app.database, for: key, before: lvts ?? VTS(Int64.max))
+					dbVts += backwardDBVTS
+				} catch let err as Any {
+					logger.error("Advance:processResponse failed: \(err)")
+					return
+				}
 
-			if vtsToFetch.count > 0 {
-				app.stats.advanceItems += vtsToFetch.count
-				let fetchOp = FetchOperation(key: key, vts: vtsToFetch, rvtsPrime: rvtsPrime)
-				app.operationQueue.addOperation(fetchOp)
-				fetchScheduled = true
+				let vtsToFetch = response.vts.filter { v in !dbVts.contains(v) }
+
+				if vtsToFetch.count > 0 {
+					app.stats.advanceItems += vtsToFetch.count
+					let fetchOp = FetchOperation(key: key, vts: vtsToFetch, rvtsPrime: rvtsPrime)
+					app.operationQueue.addOperation(fetchOp)
+					fetchScheduled = true
+				} else {
+					//update both lvts and rvts
+					app.vts[key.key]?.rvts = rvtsPrime
+				}
 			} else {
-				app.rvts[key.key] = rvtsPrime
+				//update both lvts and rvts
+				//TODO need some code to figure out what happens when LVTS and RVTS do not overlap with LVTS and rvts we have
+				app.vts[key.key]?.rvts = rvtsPrime
 			}
-		} else {
-			app.rvts[key.key] = rvtsPrime
-		}
 
+		}
+		else { //Advance backwards
+			let lvtsPrime = response.minvts ?? response.vts.min() ?? lvts ?? Int64.max
+
+			if response.vts.count > 0 {
+				let dbVts : [VTS]
+				do {
+					dbVts = try Log.vts(in: app.database, for: key, before: lvts ?? VTS(Int64.max))
+				} catch let err as Any {
+					logger.error("Advance:processResponse failed: \(err)")
+					return
+				}
+
+				let vtsToFetch = response.vts.filter { v in !dbVts.contains(v) }
+
+				if vtsToFetch.count > 0 {
+					app.stats.advanceItems += vtsToFetch.count
+					let fetchOp = FetchOperation(key: key, vts: vtsToFetch, lvtsPrime: lvtsPrime)
+					app.operationQueue.addOperation(fetchOp)
+					fetchScheduled = true
+				} else {
+					app.vts[key.key]?.rvts = lvtsPrime
+				}
+			} else {
+				app.vts[key.key]?.rvts = lvtsPrime
+			}
+
+		}
 	}
 
 	override func finish()
@@ -355,17 +414,19 @@ class FetchOperation : Operation
 {
 	let key : Key
 	let vts : [VTS]
-	let rvtsPrime : VTS
+	let rvtsPrime : VTS?
+	let lvtsPrime : VTS?
 
 	override var description: String{
 		return "FetchOperation key=\(key.key) state=\(state)"
 	}
 
-	init(key: Key, vts: [VTS], rvtsPrime: VTS)
+	init(key: Key, vts: [VTS], rvtsPrime: VTS? = nil, lvtsPrime: VTS? = nil, amount: Int? = nil)
 	{
 		self.key = key
 		self.vts = vts
 		self.rvtsPrime = rvtsPrime
+		self.lvtsPrime = lvtsPrime
 		super.init(app: key.app)
 	}
 
@@ -400,7 +461,15 @@ class FetchOperation : Operation
 		}
 
 		// Set rvts to max of vts fetched
-		app.rvts[key.key] = rvtsPrime
+		if let rvtsPrime = rvtsPrime {
+			app.vts[key.key]?.rvts = rvtsPrime
+		}
+		else if let lvtsPrime = lvtsPrime {
+			app.vts[key.key]?.lvts =  lvtsPrime
+		}
+		else {
+			logger.error("An error occurred: Fetch did not contain an RVTS or LVTS")
+		}
 	}
 
 	override func finish()

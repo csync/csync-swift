@@ -128,6 +128,7 @@ open class Key : NSObject
 		return key
 	}
 
+	private(set) var outstandingBackwardsValues = 0
 	/**
 	If the key is invalid, an error value specifying the problem (read-only).
 	*/
@@ -424,7 +425,7 @@ open class Key : NSObject
 	// Map from (concrete) keystring to highest VTS delivered to this listener
 	// Serialization: This structure should only be accessed on the main queue, just before invoking the
 	// listener (or otherwise scheduled on the main queue)
-	private var latest : [String:VTS] = [:]
+	private var latest : [String:(lvts: VTS,rvts: VTS)] = [:]
 
 	func deliver(_ value : Value)
 	{
@@ -437,9 +438,25 @@ open class Key : NSObject
 			if let listenerCallback = self.listener {
 				// Check that the value to be delivered is more recent than the last value
 				// delivered to this listener for this key.  If not, we simply skip it.
-				let latestVts = self.latest[value.key] ?? 0
-				if latestVts < value.vts {
-					self.latest[value.key] = value.vts
+				let latestVts = self.latest[value.key]?.rvts ?? 0
+				let earliestVts = self.latest[value.key]?.lvts ?? Int64.max
+				if earliestVts > value.vts {
+					if self.latest[value.key] != nil {
+						self.latest[value.key]?.lvts = value.vts
+					}
+					else {
+						self.latest[value.key]=(value.vts, value.vts)
+					}
+					//TODO: count = count - 1
+					listenerCallback(value, nil)
+				}
+				else if latestVts < value.vts {
+					if self.latest[value.key] != nil {
+						self.latest[value.key]?.rvts = value.vts
+					}
+					else {
+						self.latest[value.key]=(value.vts, value.vts)
+					}
 					listenerCallback(value, nil)
 				}
 			}
