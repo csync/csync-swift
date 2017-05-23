@@ -17,6 +17,7 @@
 import Foundation
 
 typealias VTS = Int64
+typealias VTSSet = (lvts: VTS?,rvts: VTS?)
 
 // MARK: - Value
 

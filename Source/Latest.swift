@@ -102,4 +102,29 @@ class Latest
 		}
 		return values
 	}
+
+	class func values(in db: Database, for keyObj: Key, with vtsSet: VTSSet) throws -> [Value]
+	{
+		var query = latest.filter(!isdeleted)
+		// restrict query to match all leading non-wildcard key components
+		for (i, k) in keyObj.components.enumerated() {
+			if k == "*" || k == "#" {
+				break
+			}
+			query = query.filter(keys[i] == k)
+		}
+		if let lvts = vtsSet.lvts{
+			query = query.filter(vts > lvts)
+		}
+		if let rvts = vtsSet.rvts{
+			query = query.filter(vts <= rvts) //Right side is inclusive between lvts and rvts. Outside lvts is inclusive
+		}
+		let items = try db.prepare(query)
+		var values : [Value] = []
+		for item in items where keyObj.matches(item[key]) {
+			values.append(Value(key:item[key], exists:!item[isdeleted], stable: true, data:item[data],
+			                    acl:item[aclid], creator: item[creatorid], cts:item[cts], vts:item[vts]))
+		}
+		return values
+	}
 }

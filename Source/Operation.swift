@@ -271,6 +271,7 @@ class AdvanceOperation : Operation
 	let key : Key
 	var rvts : VTS?
 	var lvts : VTS?
+	var amountBack: Int = 0
 
 	var fetchScheduled = false
 
@@ -291,15 +292,18 @@ class AdvanceOperation : Operation
 			return nil
 		}
 
-		rvts = app.vts[key.key]?.rvts ?? nil
-		lvts = app.vts[key.key]?.lvts ?? nil
+		rvts = app.vts[key.key]?.rvts
+		lvts = app.vts[key.key]?.lvts
 
 		var amount = 0
+		objc_sync_enter(app.backListeners)
 		if let backListeners = app.backListeners[key.key]{
 			for key in backListeners {
 				amount = max(amount, key.outstandingBackwardsValues)
 			}
 		}
+		objc_sync_exit(app.backListeners)
+		amountBack = amount
 		if amount > 0 {
 			let request = Request.advance(key, rvts: rvts, lvts: lvts, backwardLimit: amount)
 			return request
@@ -326,19 +330,19 @@ class AdvanceOperation : Operation
 		//Get lvtsprime and rvtsprime of response
 		//If we have stuff to fetch, update lvts and rvts after fetch, otherwise update it now
 
-		//Else
-		if true { //Advance normally
-			let rvtsPrime = response.maxvts ?? response.vts.max() ?? rvts ?? 0
+		let rvtsPrime = response.maxvts ?? response.vts.max() ?? rvts ?? 0
+		let lvtsPrime = response.minvts ?? response.vts.min() ?? lvts ?? rvtsPrime
 
-			if response.vts.count > 0 {
-				var dbVts : [VTS] = []
-				do {
-					let forwardDBVTS = try Log.vts(in: app.database, for: key, after: rvts ?? 0)
-					dbVts += forwardDBVTS
-				} catch let err as Any {
-					logger.error("Advance:processResponse failed: \(err)")
-					return
-				}
+		if response.vts.count > 0 {
+			var dbVts : [VTS] = []
+			do {
+				let forwardDBVTS = try Log.vts(in: app.database, for: key, after: rvts ?? 0)
+				dbVts += forwardDBVTS
+			} catch let err as Any {
+				logger.error("Advance:processResponse failed: \(err)")
+				return
+			}
+			if amountBack > 0 {
 				do {
 					let backwardDBVTS = try Log.vts(in: app.database, for: key, before: lvts ?? VTS(Int64.max))
 					dbVts += backwardDBVTS
@@ -346,51 +350,41 @@ class AdvanceOperation : Operation
 					logger.error("Advance:processResponse failed: \(err)")
 					return
 				}
-
-				let vtsToFetch = response.vts.filter { v in !dbVts.contains(v) }
-
-				if vtsToFetch.count > 0 {
-					app.stats.advanceItems += vtsToFetch.count
-					let fetchOp = FetchOperation(key: key, vts: vtsToFetch, rvtsPrime: rvtsPrime)
-					app.operationQueue.addOperation(fetchOp)
-					fetchScheduled = true
-				} else {
-					//update both lvts and rvts
-					app.vts[key.key]?.rvts = rvtsPrime
-				}
-			} else {
-				//update both lvts and rvts
-				//TODO need some code to figure out what happens when LVTS and RVTS do not overlap with LVTS and rvts we have
-				app.vts[key.key]?.rvts = rvtsPrime
 			}
 
-		}
-		else { //Advance backwards
-			let lvtsPrime = response.minvts ?? response.vts.min() ?? lvts ?? Int64.max
-
-			if response.vts.count > 0 {
-				let dbVts : [VTS]
+			//TODO move to fetch
+			//If we are going backwards, we may overlap with some values in the db, we should check those and update lvts/rvts accordingly
+			if amountBack > 0 {
 				do {
-					dbVts = try Log.vts(in: app.database, for: key, before: lvts ?? VTS(Int64.max))
+					if let vtsSet = try VTSTable.vts(in: app.database, for: key.key) {
+						if let lvts = vtsSet.lvts, let rvts = vtsSet.rvts {
+							if lvts < lvtsPrime && rvts < rvtsPrime {
+								//Deliver from db everything between lvts and lvts and set new lvts
+								//app.deliverFromDB(for: key, between: <#T##VTSSet#>)
+							}
+						}
+					}
 				} catch let err as Any {
 					logger.error("Advance:processResponse failed: \(err)")
 					return
 				}
-
-				let vtsToFetch = response.vts.filter { v in !dbVts.contains(v) }
-
-				if vtsToFetch.count > 0 {
-					app.stats.advanceItems += vtsToFetch.count
-					let fetchOp = FetchOperation(key: key, vts: vtsToFetch, lvtsPrime: lvtsPrime)
-					app.operationQueue.addOperation(fetchOp)
-					fetchScheduled = true
-				} else {
-					app.vts[key.key]?.rvts = lvtsPrime
-				}
-			} else {
-				app.vts[key.key]?.rvts = lvtsPrime
 			}
 
+			let vtsToFetch = response.vts.filter { v in !dbVts.contains(v) }
+
+			if vtsToFetch.count > 0 {
+				app.stats.advanceItems += vtsToFetch.count
+				let fetchOp = FetchOperation(key: key, vts: vtsToFetch, rvtsPrime: rvtsPrime)
+				app.operationQueue.addOperation(fetchOp)
+				fetchScheduled = true
+			} else {
+				//update both lvts and rvts
+				app.vts[key.key] = (lvtsPrime, rvtsPrime)
+			}
+		} else {
+			//update both lvts and rvts
+			//TODO need some code to figure out what happens when LVTS and RVTS do not overlap with LVTS and rvts we have
+			app.vts[key.key] = (lvtsPrime, rvtsPrime)
 		}
 	}
 

@@ -74,7 +74,7 @@ class Log
 	class func vts(in db: Database, for keyObj: Key, before lvts: VTS) throws -> [VTS]
 	{
 		var query = log.select(vts, key)      // SELECT vts,key FROM latest
-			.filter(vts < lvts)		 // WHERE vts < lvts
+			.filter(vts <= lvts)		 // WHERE vts <= lvts
 		// restrict query to match all leading non-wildcard key components
 		for (i, k) in keyObj.components.enumerated() {
 			if k == "*" || k == "#" {

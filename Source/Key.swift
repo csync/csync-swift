@@ -254,7 +254,7 @@ open class Key : NSObject
 		}
 
 		self.listener = listener
-		self.latest = [:]	// Clear latest so all values are delivered to new listener
+		self.vts = (nil,nil)	// Clear latest so all values are delivered to new listener
 
 		// Add this key to an internal list of all active listeners
 		app.addListener(self)
@@ -425,7 +425,7 @@ open class Key : NSObject
 	// Map from (concrete) keystring to highest VTS delivered to this listener
 	// Serialization: This structure should only be accessed on the main queue, just before invoking the
 	// listener (or otherwise scheduled on the main queue)
-	private var latest : [String:(lvts: VTS,rvts: VTS)] = [:]
+	private var vts : VTSSet = (nil,nil)
 
 	func deliver(_ value : Value)
 	{
@@ -438,25 +438,27 @@ open class Key : NSObject
 			if let listenerCallback = self.listener {
 				// Check that the value to be delivered is more recent than the last value
 				// delivered to this listener for this key.  If not, we simply skip it.
-				let latestVts = self.latest[value.key]?.rvts ?? 0
-				let earliestVts = self.latest[value.key]?.lvts ?? Int64.max
-				if earliestVts > value.vts {
-					if self.latest[value.key] != nil {
-						self.latest[value.key]?.lvts = value.vts
+				let latestVts = self.vts.rvts ?? 0
+				let earliestVts = self.vts.lvts ?? Int64.max
+
+				if earliestVts >= value.vts { //Going backwards
+					if self.outstandingBackwardsValues > 0 {
+						self.vts.lvts = value.vts
+						self.outstandingBackwardsValues -= 1
+						listenerCallback(value, nil)
 					}
 					else {
-						self.latest[value.key]=(value.vts, value.vts)
+						//If we are still subscribed to get previous values, remove ourself from that listener list
+						//TODO: lock
+						objc_sync_enter(self.app.backListeners)
+						if let index = self.app.backListeners[self.key]?.index(of: self) {
+							self.app.backListeners[self.key]?.remove(at: index)
+						}
+						objc_sync_exit(self.app.backListeners)
 					}
-					//TODO: count = count - 1
-					listenerCallback(value, nil)
 				}
 				else if latestVts < value.vts {
-					if self.latest[value.key] != nil {
-						self.latest[value.key]?.rvts = value.vts
-					}
-					else {
-						self.latest[value.key]=(value.vts, value.vts)
-					}
+					self.vts.rvts = value.vts
 					listenerCallback(value, nil)
 				}
 			}
@@ -488,6 +490,10 @@ open class Key : NSObject
 		}
 
 		return (components.count == otherComponents.count)
+	}
+
+	func setLatest(to vtsSet: VTSSet){
+		vts = vtsSet
 	}
 
 }

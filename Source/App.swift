@@ -218,8 +218,9 @@ public class App : NSObject
 	var transport : Transport!
 	var database : Database!
 
-	var vts : [String:(lvts:VTS, rvts: VTS)] = [:]
-	var backListeners: [String: [Key]] = [:]
+	var vts : [String:VTSSet] = [:]
+	
+	var backListeners: [String:[Key]] = [:]
 
 
 	private var countLock : AnyObject = NSObject()
@@ -393,9 +394,18 @@ public class App : NSObject
 		}
 		objc_sync_exit(self.listeners)
 
-		/*DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: {
-			self.deliverFromDB(keyObj)
-		})*/
+		objc_sync_enter(self.vts)
+		let vtsSet = vts[keyObj.key] as VTSSet?
+		objc_sync_exit(self.vts)
+
+		if let rvts = vtsSet?.rvts {
+			keyObj.setLatest(to: (rvts,rvts))
+			if vtsSet?.lvts != nil {
+				DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: {
+					self.deliverFromDB(for: keyObj, between: vtsSet!)
+				})
+			}
+		}
 
 		if newListener {
 			// Send listen request to the server
@@ -419,6 +429,20 @@ public class App : NSObject
 			logger.error("deliverFromDB failed: \(err)")
 		}
 	}
+
+	func deliverFromDB(for key: Key, between vtsSet: VTSSet)
+	{
+		do {
+			let dbValues = try Latest.values(in: database, for: key, with: vtsSet)
+			//Only deliver keys that still exist at this moment.
+			for value in dbValues where value.exists == true {
+				key.deliver(value)
+			}
+		} catch let err as Any {
+			logger.error("deliverFromDB failed: \(err)")
+		}
+	}
+
 
 	func updateLatest(_ value: Value) -> Bool
 	{
