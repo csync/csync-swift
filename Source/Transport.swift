@@ -22,7 +22,7 @@ struct SessionInfo
 	let uuid : String
 	let userid : String
 	let tokenExpires : Int
-	let tokenInfo : Dictionary<String, AnyObject>
+	let tokenInfo : [String: AnyObject]
 }
 
 class Transport
@@ -35,7 +35,7 @@ class Transport
 	/** The port for the CSync service (read-only) */
 	let port : Int!
 
-	typealias TransportCallback = (_ response: Response?, _ error: NSError?)->()
+	typealias TransportCallback = (_ response: Response?, _ error: NSError?) -> Void
 
 	private let ws : WebSocket!
 	private var wsState : WebSocketReadyState = .closed
@@ -91,7 +91,7 @@ class Transport
 	/**
 	Starts a session with the server.
 	*/
-	func startSession(_ authProvider: String, token: String) -> () {
+	func startSession(_ authProvider: String, token: String) {
 		// For now, we simply return if a session is active
 		guard sessionId == nil else {
 			return
@@ -112,7 +112,7 @@ class Transport
 	/**
 	Ends a session with the server.
 	*/
-	func endSession() -> () {
+	func endSession() {
 
 		clearSessionInfo()
 		// Close the connection to the server
@@ -123,7 +123,7 @@ class Transport
 	/**
 	Clear Session information.
 	*/
-	func clearSessionInfo() -> () {
+	func clearSessionInfo() {
 		// Clear session info
 		authProvider = nil
 		token = nil
@@ -131,7 +131,7 @@ class Transport
 
 	}
 
-	var permanentError : NSError? = nil
+	var permanentError : NSError?
 
 	func endSessionPermanently(_ error: NSError) {
 		permanentError = error
@@ -141,7 +141,7 @@ class Transport
 	/**
 	Send a request message
 	*/
-	func send(_ req : Request, callback: @escaping TransportCallback) -> () {
+	func send(_ req : Request, callback: @escaping TransportCallback) {
 		if !connected {
 			guard permanentError == nil else {
 				DispatchQueue.main.async {
@@ -167,7 +167,7 @@ class Transport
 
 	// MARK: Internal methods
 
-	private func connect() -> () {
+	private func connect() {
 		guard sessionId != nil else {
 			logger.warn("Attempt to connect with no active session")
 			return
@@ -197,13 +197,13 @@ class Transport
 
 	// MARK: WebSocket event handlers
 
-	private func handleOpen() -> () {
+	private func handleOpen() {
 		logger.info("WebSocket opened")
 		wsState = .open
 	}
 
 	// swiftlint:disable:next cyclomatic_complexity
-	private func handleMessage(_ data : Any) -> () {
+	private func handleMessage(_ data : Any) {
 		// The following is to avoid swift_abortRetainUnowned crash
 		guard app != nil else {
 			return
@@ -251,12 +251,12 @@ class Transport
 		}
 	}
 
-	private func handleError(_ error : Error) -> () {
+	private func handleError(_ error : Error) {
 		wsState = ws.readyState
 		logger.error("WebSocket reported error \(error)")
 	}
 
-	private func handleClose(_ code : Int, reason : String, wasClean : Bool) -> () {
+	private func handleClose(_ code : Int, reason : String, wasClean : Bool) {
 		wsState = .closed
 		logger.info("WebSocket closed: \(reason)")
 		guard app != nil else {

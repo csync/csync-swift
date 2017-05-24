@@ -46,7 +46,7 @@ class AdvanceTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 		let testKey = app.key("tests.SimpleAdvance."+UUID().uuidString)
 
@@ -57,7 +57,7 @@ class AdvanceTests: XCTestCase {
 
 		// closure to register listener for testKey
 		let doListen = {
-			testKey.listen { (value, error) -> () in
+			testKey.listen { (value, error) -> Void in
 				XCTAssertNil(error)
 				XCTAssertNotNil(value)
 				if value!.key == testKey.key {
@@ -66,7 +66,7 @@ class AdvanceTests: XCTestCase {
 						expectation.fulfill()
 						testKey.unlisten()
 					} else {
-						print("Got intermediate write with value \(val)")
+						print("Got intermediate write with value \(String(describing: val))")
 					}
 				}
 			}
@@ -75,7 +75,7 @@ class AdvanceTests: XCTestCase {
 		// Do some writes
 
 		var count = 1
-		var writeHandler : (Key, NSError?) -> () = {_, _ in }
+		var writeHandler : (Key, NSError?) -> Void = {_, _ in }
 		writeHandler = { key, error in
 			XCTAssertNil(error)
 			count += 1
@@ -98,21 +98,22 @@ class AdvanceTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
-		let listenKey = app.key("#")
-		let writeKeys = [ "tests.AdvanceWithWildcards",
-		                  "tests.AdvanceWithWildcards."+UUID().uuidString,
-		                  "tests.AdvanceWithWildcards.bar."+UUID().uuidString,
-		                  UUID().uuidString+".AdvanceWithWildcards.baz"]
+		let uuidString = UUID().uuidString
+		let listenKey = app.key("tests.AdvanceWithWildcards." + uuidString + ".#")
+		let writeKeys = [ "tests.AdvanceWithWildcards." + uuidString + ".a",
+		                  "tests.AdvanceWithWildcards." + uuidString + "." + UUID().uuidString,
+		                  "tests.AdvanceWithWildcards." + uuidString + ".bar" + UUID().uuidString,
+		                  "tests.AdvanceWithWildcards." + uuidString + "." + UUID().uuidString+".AdvanceWithWildcards"]
 
 		// closure to register listener for listenKey
 		var total = 0
 		var count = 0
 		var start : Date! = nil
 		let doListen = {
-			listenKey.listen { (value, error) -> () in
+			listenKey.listen { (value, error) -> Void in
 				XCTAssertNil(error)
 				XCTAssertNotNil(value)
 				total += 1
@@ -134,7 +135,7 @@ class AdvanceTests: XCTestCase {
 		// Do some writes
 		for (index, keyString) in writeKeys.enumerated() {
 			let writeKey = app.key(keyString)
-			writeKey.write("\(index)")  { key, error in
+			writeKey.write("\(index)")  { _, error in
 				XCTAssertNil(error)
 				if index == writeKeys.count-1 {
 					// All writes have completed, so start listening
@@ -152,7 +153,7 @@ class AdvanceTests: XCTestCase {
 		start = Date()
 		waitForExpectations(timeout: 20.0) { (error) -> Void in
 			if error != nil {
-				print("\(#function) failed \(error): total = \(total) count is \(count)")
+				print("\(#function) failed \(String(describing: error)): total = \(total) count is \(count)")
 			}
 		}
 
@@ -164,7 +165,7 @@ class AdvanceTests: XCTestCase {
 		// Connect to the CSync store
 		let config = getConfig()
 		let app = App(host: config.host, port: config.port, options: config.options)
-		app.authenticate(config.authenticationProvider, token: config.token) { authData, error in }
+		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in }
 
 		let testKey = app.key("tests.AdvanceCounts."+NSUUID().uuidString)
 
@@ -173,7 +174,7 @@ class AdvanceTests: XCTestCase {
 
 		let numPubs = 50
 		var count = 0
-		testKey.listen { (value: Value?, error: NSError?) -> () in
+		testKey.listen { (value: Value?, error: NSError?) -> Void in
 			XCTAssertNil(error)
 			count += 1
 			if Int(value!.data!)! < numPubs {

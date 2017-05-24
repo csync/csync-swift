@@ -41,7 +41,7 @@ class Database
 	func prepare(_ query: QueryType) throws-> AnySequence<SQLite.Row> {
 		return try conn.prepare(query)
 	}
-	func run(_ stmt: String) throws -> () {
+	func run(_ stmt: String) throws {
 		try conn.run(stmt)
 	}
 	func run(_ insert: SQLite.Insert) throws -> Int64 {

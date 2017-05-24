@@ -120,7 +120,7 @@ public class App : NSObject
 	}
 
 	/** The the authentication context for the user of the CSync service. (read-only) */
-	private(set) public var authData: AuthData? = nil
+	private(set) public var authData: AuthData?
 
 	// MARK: Authenticating the app user to the CSync Service
 
@@ -137,7 +137,7 @@ public class App : NSObject
 
 	*/
 	@objc(authenticateWithOAuthProvider:token:completionHandler:)
-	public func authenticate(_ oauthProvider: String, token: String, completionHandler:((_ authData: AuthData?, _ error: NSError?)->())?) {
+	public func authenticate(_ oauthProvider: String, token: String, completionHandler:((_ authData: AuthData?, _ error: NSError?) -> Void)?) {
 		if transport.sessionId != nil {
 			unauth()
 		}
@@ -157,7 +157,7 @@ public class App : NSObject
 
 	All outstanding writes and listens are cancelled.
 	*/
-	public func unauth(_ completionHandler: ((_ error: NSError?) -> ())? = nil ) ->()
+	public func unauth(_ completionHandler: ((_ error: NSError?) -> Void)? = nil )
 	{
 		// Clear credentials and acls
 		authData = nil
@@ -166,9 +166,8 @@ public class App : NSObject
 
 		if let authCallback = authCallback {
 			authCallback(nil, CSError.requestError as NSError?)
-			self.authCallback = nil;
+			self.authCallback = nil
 		}
-		
 		if transport.canDisconnect {
 			//Store callback to call it when the socket has closed
 			unauthCallback = completionHandler
@@ -181,7 +180,7 @@ public class App : NSObject
 				pendingOp.cancel()
 			}
 		} else {
-			completionHandler?(nil)		
+			completionHandler?(nil)
 		}
 	}
 
@@ -223,21 +222,21 @@ public class App : NSObject
 
 	var acls : [String]?
 
-	var serverUUID : String? = nil
+	var serverUUID : String?
 
 	let logger = Logger("App")
 
 	let stats = Stats()
 
-	var authCallback : ((_ authData: AuthData?, _ error: NSError?)->())? = nil
-	var unauthCallback : ((_ error: NSError?)->())? = nil
+	var authCallback : ((_ authData: AuthData?, _ error: NSError?) -> Void)?
+	var unauthCallback : ((_ error: NSError?) -> Void)?
 
 	// MARK: - App internal methods
 
 	/* This method should be called from the transport layer whenever a "connect response" is received
 	   from the server.  It must verify that the server instance UUID has not changed and that the
 	   user authentication was successful */
-	func handleConnect(_ sessionInfo: SessionInfo?, error: NSError?) -> ()
+	func handleConnect(_ sessionInfo: SessionInfo?, error: NSError?)
 	{
 		logger.trace("Entry to app.handleConnect")
 
@@ -325,7 +324,7 @@ public class App : NSObject
 
 	// MARK: Operation Queue methods
 
-	func addOperation(_ op: Operation) -> ()
+	func addOperation(_ op: Operation)
 	{
 		if let writeOp = op as? PubOperation {
 			queueWrite(writeOp)
@@ -336,7 +335,7 @@ public class App : NSObject
 		}
 	}
 
-	private func queueWrite(_ writeOp: PubOperation) -> ()
+	private func queueWrite(_ writeOp: PubOperation)
 	{
 		// Serialize write operations to the same key
 
@@ -354,7 +353,7 @@ public class App : NSObject
 		operationQueue.addOperation(writeOp)
 	}
 
-	private func queueSub(_ subOp: SubOperation) -> ()
+	private func queueSub(_ subOp: SubOperation)
 	{
 		// Serialize sub operations to the same key
 
@@ -410,10 +409,8 @@ public class App : NSObject
 		do {
 			let dbValues = try Latest.values(in: database, for:key)
 			//Only deliver keys that still exist at this moment.
-			for value in dbValues {
-				if value.exists == true {
-					key.deliver(value)
-				}
+			for value in dbValues where value.exists == true {
+				key.deliver(value)
 			}
 		} catch let err as Any {
 			logger.error("deliverFromDB failed: \(err)")

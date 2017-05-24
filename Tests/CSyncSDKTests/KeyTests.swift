@@ -62,7 +62,7 @@ class KeyTests: XCTestCase {
 			XCTAssertFalse(k3.isKeyPattern)
 
 			// Key with max (200) size
-			let _ = app.key(["ABCDEFGHIJKLMNOPQRSTUVWXYabcdefghijklmnopqrstuvwxy",	// 50 chars
+			_ = app.key(["ABCDEFGHIJKLMNOPQRSTUVWXYabcdefghijklmnopqrstuvwxy",	// 50 chars
 				"ABCDEFGHIJKLMNOPQRSTUVWXYabcdefghijklmnopqrstuvwxy",			// 50 chars
 				"ABCDEFGHIJKLMNOPQRSTUVWXYabcdefghijklmnopqrstuvwxy",			// 50 chars
 				"ABCDEFGHIJKLMNOPQRSTUVWXYabcdefghijklmnopqrstuv"])			// 47 chars

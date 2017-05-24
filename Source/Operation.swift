@@ -109,7 +109,7 @@ class Operation : Foundation.Operation
 		}
 	}
 
-	func send() -> ()
+	func send()
 	{
 		if self.isCancelled {
 			error = error ?? err(CSError.internalError, msg:"Operation cancelled")
@@ -159,7 +159,7 @@ class Operation : Foundation.Operation
 		return nil
 	}
 
-	func processResponse(_ response: Response?, error: NSError?)->()
+	func processResponse(_ response: Response?, error: NSError?)
 	{
 		self.error = error ?? response!.error
 	}
@@ -177,7 +177,7 @@ class PubOperation : Operation
 	var aclid: String?
 	var delete : Bool = false
 	let cts = Int64(Date().timeIntervalSince1970*1000)
-	var completionHandler : ((_ key: Key, _ error: NSError?)->())?
+	var completionHandler : ((_ key: Key, _ error: NSError?) -> Void)?
 
 	override var description: String{
 		return "PubOperation key=\(key.key) state=\(state)"
@@ -257,7 +257,7 @@ class GetAclsOperation : Operation
 		return request
 	}
 
-	override func processResponse(_ response: Response?, error: NSError?)->()
+	override func processResponse(_ response: Response?, error: NSError?)
 	{
 		self.error = error ?? response!.error
 		if let acls = response?.acls {
@@ -295,7 +295,7 @@ class AdvanceOperation : Operation
 		return request
 	}
 
-	override func processResponse(_ response: Response?, error: NSError?)->()
+	override func processResponse(_ response: Response?, error: NSError?)
 	{
 		self.error = error ?? response!.error
 
@@ -380,7 +380,7 @@ class FetchOperation : Operation
 		return request
 	}
 
-	override func processResponse(_ response: Response?, error: NSError?)->()
+	override func processResponse(_ response: Response?, error: NSError?)
 	{
 		self.error = error ?? response!.error
 
