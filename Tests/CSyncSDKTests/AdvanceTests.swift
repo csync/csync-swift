@@ -101,11 +101,12 @@ class AdvanceTests: XCTestCase {
 		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 		}
 
-		let listenKey = app.key("#")
-		let writeKeys = [ "tests.AdvanceWithWildcards",
-		                  "tests.AdvanceWithWildcards."+UUID().uuidString,
-		                  "tests.AdvanceWithWildcards.bar."+UUID().uuidString,
-		                  UUID().uuidString+".AdvanceWithWildcards.baz"]
+		let uuidString = UUID().uuidString
+		let listenKey = app.key("tests.AdvanceWithWildcards." + uuidString + ".#")
+		let writeKeys = [ "tests.AdvanceWithWildcards." + uuidString + ".a",
+		                  "tests.AdvanceWithWildcards." + uuidString + "." + UUID().uuidString,
+		                  "tests.AdvanceWithWildcards." + uuidString + ".bar" + UUID().uuidString,
+		                  "tests.AdvanceWithWildcards." + uuidString + "." + UUID().uuidString+".AdvanceWithWildcards"]
 
 		// closure to register listener for listenKey
 		var total = 0
