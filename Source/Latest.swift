@@ -119,6 +119,7 @@ class Latest
 		if let rvts = vtsSet.rvts{
 			query = query.filter(vts <= rvts) //Right side is inclusive between lvts and rvts. Outside lvts is inclusive
 		}
+		query = query.order(vts.asc)
 		let items = try db.prepare(query)
 		var values : [Value] = []
 		for item in items where keyObj.matches(item[key]) {

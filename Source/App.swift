@@ -399,10 +399,9 @@ public class App : NSObject
 		objc_sync_exit(self.vts)
 
 		if let rvts = vtsSet?.rvts {
-			keyObj.setLatest(to: (rvts,rvts))
 			if vtsSet?.lvts != nil {
 				DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: {
-					self.deliverFromDB(for: keyObj, between: vtsSet!)
+					self.deliverValuesFromDB(for: keyObj, between: vtsSet!)
 				})
 			}
 		}
@@ -423,20 +422,19 @@ public class App : NSObject
 			let dbValues = try Latest.values(in: database, for:key)
 			//Only deliver keys that still exist at this moment.
 			for value in dbValues where value.exists == true {
-                key.deliver(value)
+				key.deliver(oldValue: value)
 			}
 		} catch let err as Any {
 			logger.error("deliverFromDB failed: \(err)")
 		}
 	}
 
-	func deliverFromDB(for key: Key, between vtsSet: VTSSet)
+	func deliverValuesFromDB(for key: Key, between vtsSet: VTSSet)
 	{
 		do {
 			let dbValues = try Latest.values(in: database, for: key, with: vtsSet)
-			//Only deliver keys that still exist at this moment.
-			for value in dbValues where value.exists == true {
-				key.deliver(value)
+			for value in dbValues {
+				deliverToListeners(value)
 			}
 		} catch let err as Any {
 			logger.error("deliverFromDB failed: \(err)")
@@ -474,7 +472,7 @@ public class App : NSObject
 		listeners = listeners.filter{ key in key.listener != nil }
 
 		for key in listeners where key.matches(keystring) {
-			key.deliver(value)
+			key.deliver(newValue: value)
 		}
 		objc_sync_exit(self.listeners)
 	}
@@ -494,6 +492,8 @@ public class App : NSObject
 		logger.trace("Starting advance for \(key.key)")
 
 		let advanceOp = AdvanceOperation(key: key)
-		operationQueue.addOperation(advanceOp)
+		DispatchQueue.main.async {
+			self.operationQueue.addOperation(advanceOp)
+		}
 	}
 }

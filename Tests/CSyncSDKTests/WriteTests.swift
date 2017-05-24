@@ -259,10 +259,6 @@ class WriteTests: XCTestCase {
 		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 			//Check to be sure the right 3 keys are deleted
 			let listenKey = app.key("tests.DeleteWildcard." + uuid + ".a.*")
-			let writeKey2 = app.key("tests.DeleteWildcard." + uuid + ".b.e")
-			writeKey2.write("be")
-			let writeKey = app.key("tests.DeleteWildcard." + uuid + ".a.b")
-			writeKey.write("b")
 			listenKey.listen { (value, _) in
 				if let key = value?.key {
 					if key == "tests.DeleteWildcard." + uuid + ".a.b"{
@@ -278,6 +274,10 @@ class WriteTests: XCTestCase {
 				}
 				self.keyToDelete = app.key("tests.DeleteWildcard." + uuid + ".#")
 			}
+			let writeKey2 = app.key("tests.DeleteWildcard." + uuid + ".b.e")
+			writeKey2.write("be")
+			let writeKey = app.key("tests.DeleteWildcard." + uuid + ".a.b")
+			writeKey.write("b")
 		}
 		waitForExpectations(timeout: 30.0, handler:nil)
 	}
@@ -290,10 +290,6 @@ class WriteTests: XCTestCase {
 		app.authenticate(config.authenticationProvider, token: config.token) { _, _ in
 			//Check to be sure the right 3 keys are deleted
 			let listenKey = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.*.e")
-			let writeKey2 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.b.d")
-			writeKey2.write("c")
-			let writeKey = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.b.e")
-			writeKey.write("b")
 			listenKey.listen { (value, _) in
 				if let key = value?.key {
 					if key == "tests.DeleteWildcardInMiddle." + uuid + ".a.b.e"  {
@@ -308,6 +304,11 @@ class WriteTests: XCTestCase {
 					}
 				}
 			}
+			let writeKey2 = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.b.d")
+			writeKey2.write("c")
+			let writeKey = app.key("tests.DeleteWildcardInMiddle." + uuid + ".a.b.e")
+			writeKey.write("b")
+			
             self.keyToDelete = app.key("tests.DeleteWildcardInMiddle." + uuid + ".#")
 		}
 		waitForExpectations(timeout: 30.0, handler:nil)

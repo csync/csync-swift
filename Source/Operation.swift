@@ -289,27 +289,42 @@ class AdvanceOperation : Operation
 	{
 		guard key.error == nil else {
 			error = key.error!
+			print("************BAD KEY")
 			return nil
 		}
 
 		rvts = app.vts[key.key]?.rvts
 		lvts = app.vts[key.key]?.lvts
 
-		var amount = 0
+		var amount = Int.max
 		objc_sync_enter(app.backListeners)
 		if let backListeners = app.backListeners[key.key]{
 			for key in backListeners {
-				amount = max(amount, key.outstandingBackwardsValues)
+				if key.outstandingBackwardsValues > 0 {
+					amount = min(amount, key.outstandingBackwardsValues)
+				}
 			}
 		}
 		objc_sync_exit(app.backListeners)
-		amountBack = amount
+		if amount == Int.max {
+			amountBack = 0
+		}
+		else {
+			amountBack = amount
+		}
+
 		if amount > 0 {
 			let request = Request.advance(key, rvts: rvts, lvts: lvts, backwardLimit: amount)
+			if request == nil {
+				print("we messed up *****")
+			}
 			return request
 		}
 		else {
 			let request = Request.advance(key, rvts: rvts)
+			if request == nil {
+				print("we messed up *****")
+			}
 			return request
 		}
 	}
@@ -352,39 +367,42 @@ class AdvanceOperation : Operation
 				}
 			}
 
-			//TODO move to fetch
-			//If we are going backwards, we may overlap with some values in the db, we should check those and update lvts/rvts accordingly
-			if amountBack > 0 {
-				do {
-					if let vtsSet = try VTSTable.vts(in: app.database, for: key.key) {
-						if let lvts = vtsSet.lvts, let rvts = vtsSet.rvts {
-							if lvts < lvtsPrime && rvts < rvtsPrime {
-								//Deliver from db everything between lvts and lvts and set new lvts
-								//app.deliverFromDB(for: key, between: <#T##VTSSet#>)
-							}
-						}
-					}
-				} catch let err as Any {
-					logger.error("Advance:processResponse failed: \(err)")
-					return
-				}
-			}
-
 			let vtsToFetch = response.vts.filter { v in !dbVts.contains(v) }
 
 			if vtsToFetch.count > 0 {
 				app.stats.advanceItems += vtsToFetch.count
-				let fetchOp = FetchOperation(key: key, vts: vtsToFetch, rvtsPrime: rvtsPrime)
+				let fetchOp = FetchOperation(key: key, vts: vtsToFetch, lvtsPrime: lvtsPrime, rvtsPrime: rvtsPrime)
 				app.operationQueue.addOperation(fetchOp)
 				fetchScheduled = true
 			} else {
 				//update both lvts and rvts
 				app.vts[key.key] = (lvtsPrime, rvtsPrime)
+				//TODO: deliver from db?
+				
+				//If we are going backwards, we may overlap with some values in the db, we should check those and update lvts/rvts accordingly
+				if amountBack > 0 {
+					do {
+						if let vtsSet = try VTSTable.vts(in: app.database, for: key.key) {
+							if let lvts = vtsSet.lvts, let rvts = vtsSet.rvts {
+								if lvts < lvtsPrime && rvts < rvtsPrime {
+									app.deliverValuesFromDB(for: key, between: (lvts,lvtsPrime))
+								}
+							}
+						}
+					} catch let err as Any {
+						logger.error("Advance:processResponse failed: \(err)")
+						return
+					}
+				}
+				//TODO: Maybe think about error handling?
+				_ = try? VTSTable.insert(app.database, value: (lvtsPrime, rvtsPrime), pattern: key.key)
 			}
 		} else {
 			//update both lvts and rvts
 			//TODO need some code to figure out what happens when LVTS and RVTS do not overlap with LVTS and rvts we have
 			app.vts[key.key] = (lvtsPrime, rvtsPrime)
+			//TODO: Maybe think about error handling?
+			_ = try? VTSTable.insert(app.database, value: (lvtsPrime, rvtsPrime), pattern: key.key)
 		}
 	}
 
@@ -408,14 +426,14 @@ class FetchOperation : Operation
 {
 	let key : Key
 	let vts : [VTS]
-	let rvtsPrime : VTS?
-	let lvtsPrime : VTS?
+	let rvtsPrime : VTS
+	let lvtsPrime : VTS
 
 	override var description: String{
 		return "FetchOperation key=\(key.key) state=\(state)"
 	}
 
-	init(key: Key, vts: [VTS], rvtsPrime: VTS? = nil, lvtsPrime: VTS? = nil, amount: Int? = nil)
+	init(key: Key, vts: [VTS],  lvtsPrime: VTS, rvtsPrime: VTS)
 	{
 		self.key = key
 		self.vts = vts
@@ -454,16 +472,11 @@ class FetchOperation : Operation
 			}
 		}
 
-		// Set rvts to max of vts fetched
-		if let rvtsPrime = rvtsPrime {
-			app.vts[key.key]?.rvts = rvtsPrime
-		}
-		else if let lvtsPrime = lvtsPrime {
-			app.vts[key.key]?.lvts =  lvtsPrime
-		}
-		else {
-			logger.error("An error occurred: Fetch did not contain an RVTS or LVTS")
-		}
+		// Update lvts and rvts
+		//TODO: check if we need lock
+		app.vts[key.key] = (lvtsPrime, rvtsPrime)
+		_ = try? VTSTable.insert(app.database, value: (lvtsPrime, rvtsPrime), pattern: key.key)
+
 	}
 
 	override func finish()

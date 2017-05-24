@@ -68,10 +68,10 @@ class Response
 		return payload["vts"] as? [VTS] ?? []
 	}
 	var maxvts : VTS? {
-		return payload["maxvts"] as? VTS
+		return payload["rvts"] as? VTS
 	}
 	var minvts : VTS? {
-		return payload["minvts"] as? VTS
+		return payload["lvts"] as? VTS
 	}
 
 	// Expected values for Connect response

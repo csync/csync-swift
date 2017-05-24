@@ -70,6 +70,7 @@ class AdvanceTests: XCTestCase {
 					}
 				}
 			}
+			testKey.getPreviousValues(upTo: 10000)
 		}
 
 		// Do some writes
@@ -129,6 +130,7 @@ class AdvanceTests: XCTestCase {
 					}
 				}
 			}
+			listenKey.getPreviousValues(upTo: 1000)
 		}
 
 		// Do some writes
@@ -150,7 +152,7 @@ class AdvanceTests: XCTestCase {
 		keysToDelete.append(app.key(writeKeys[3]))
 
 		start = Date()
-		waitForExpectations(timeout: 20.0) { (error) -> Void in
+		waitForExpectations(timeout: 30.0) { (error) -> Void in
 			if error != nil {
 				print("\(#function) failed \(String(describing: error)): total = \(total) count is \(count)")
 			}

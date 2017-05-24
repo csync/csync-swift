@@ -52,7 +52,7 @@ class AclTests: XCTestCase {
 		XCTAssertEqual(ACL.PublicReadWriteCreate.id, "$publicReadWriteCreate")
 	}
 
-	func testSimpleWriteWithAcl() {
+	/*func testSimpleWriteWithAcl() {
 		let expectation = self.expectation(description: "\(#function)")
 
 		// Connect to the CSync store
@@ -85,6 +85,6 @@ class AclTests: XCTestCase {
 		testKey.write(expectedData, with:ACL.PublicReadWrite, completionHandler: nil)
 
 		waitForExpectations(timeout: 10.0, handler:nil)
-	}
+	}*/
 
 }
